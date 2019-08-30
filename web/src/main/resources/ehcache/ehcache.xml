@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 业务数据缓存 -->
+<ehcache name="dps-fast-busi">
+
+    <!-- 磁盘缓存位置 -->
+    <diskStore path="java.io.tmpdir"/>
+
+    <!-- 默认缓存 -->
+    <defaultCache
+            maxEntriesLocalHeap="1000"
+            eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="false">
+    </defaultCache>
+    
+     <!-- 券别配置 缓存 -->
+    <cache name="confCurrCouponTypeCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    
+    <!-- 币值配置 缓存 -->
+    <cache name="confCurrDeTypeCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    
+    <!-- 货币版别、版本缓存 -->
+    <cache name="confCurrVerCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    
+    <!-- 包装类型缓存 -->
+    <cache name="confPackTypeCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+</ehcache>
+	

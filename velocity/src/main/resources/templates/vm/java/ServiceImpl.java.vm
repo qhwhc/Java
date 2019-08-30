@@ -1,0 +1,78 @@
+package ${package}.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ${package}.dao.${className}Dao;
+import ${package}.dto.${className}DTO;
+import ${package}.service.${className}Service;
+import com.douples.common.support.Convert;
+
+/**
+ * ${tableComment} 服务层实现
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl implements ${className}Service{
+	
+	@Autowired
+	private ${className}Dao ${classname}Dao;
+
+	/**
+     * 查询${tableComment}信息
+     * 
+     * @param ${primaryKey.attrname} ${tableComment}ID
+     * @return ${tableComment}信息
+     */
+    @Override
+	public ${className}DTO select${className}ById(${primaryKey.attrType} id){
+	    return ${classname}Dao.select${className}ById(id);
+	}
+	
+	/**
+     * 查询${tableComment}列表
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return ${tableComment}集合
+     */
+	@Override
+	public List<${className}DTO> select${className}List(${className}DTO ${classname}){
+	    return ${classname}Dao.select${className}List(${classname});
+	}
+	
+    /**
+     * 新增${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	@Override
+	public int insert${className}(${className}DTO ${classname}){
+	    return ${classname}Dao.insert${className}(${classname});
+	}
+	
+	/**
+     * 修改${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	@Override
+	public int update${className}(${className}DTO ${classname}){
+	    return ${classname}Dao.update${className}(${classname});
+	}
+
+	/**
+     * 删除${tableComment}对象
+     * 
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+	@Override
+	public int delete${className}ByIds(String ids){
+		return ${classname}Dao.delete${className}ByIds(Convert.toStrArray(ids));
+	}
+	
+}

@@ -1,0 +1,524 @@
+<!-- 商行端系统主页面 -->
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<style type="text/css"> 
+@media (min-width: 768px) {
+  .container-div {
+    position: inherit;
+    margin: 20px 20px 0px 20px;
+    padding: 0 0px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+.huge {
+  font-size: 40px;
+}
+.panel-green {
+  border-color: #5cb85c;
+}
+.panel-green > .panel-heading {
+  border-color: #5cb85c;
+  color: white;
+  background-color: #5cb85c;
+}
+.panel-green > a {
+  color: #5cb85c;
+}
+.panel-green > a:hover {
+  color: #3d8b3d;
+}
+.panel-red {
+  border-color: #d9534f;
+}
+.panel-red > .panel-heading {
+  border-color: #d9534f;
+  color: white;
+  background-color: #d9534f;
+}
+.panel-red > a {
+  color: #d9534f;
+}
+.panel-red > a:hover {
+  color: #b52b27;
+}
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+.panel-yellow > .panel-heading {
+  border-color: #f0ad4e;
+  color: white;
+  background-color: #f0ad4e;
+}
+.panel-yellow > a {
+  color: #f0ad4e;
+}
+.panel-yellow > a:hover {
+  color: #df8a13;
+}
+  
+}
+</style> 
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row" style="height:138px">
+       <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-institution fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${deptCount}"></div>
+                                    <div>机构总数量</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                
+                            </div>
+                        </a>
+                    </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${professionStaffCount}"></div>
+                                    <div>从业人员总数</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                            </div>
+                        </a>
+                    </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+               <div class="panel panel-yellow">
+                   <div class="panel-heading">
+                       <div class="row">
+                           <div class="col-xs-3">
+                               <i class="fa fa-upload fa-5x"></i>
+                           </div>
+                           <div class="col-xs-9 text-right">
+                               <div class="huge" th:text="${reportSubmitCount}"></div>
+                               <div>每日上报网点</div>
+                           </div>
+                       </div>
+                   </div>
+                   <a href="#">
+                       <div class="panel-footer">
+                       </div>
+                   </a>
+               </div>
+         </div>
+         <div class="col-lg-3 col-md-3">
+              <div class="panel panel-red">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-support fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div class="huge" th:text="${counterfeitCount}"></div>
+                              <div>收缴假币张数</div>
+                          </div>
+                      </div>
+                  </div>
+                  <a href="#">
+                      <div class="panel-footer">
+                      </div>
+                  </a>
+              </div>
+         </div>
+    </div>
+
+    <div id="professionCwarnCount" class="alert alert-danger" role="alert"></div>
+
+	<div class="row">
+		<div class="col-lg-7 col-md-7">
+             <div class="panel panel-default">
+                 <div class="panel-heading">
+                                                  清分业务监测
+                 </div>
+                 
+                 <div class="panel-body">
+                     <div id="hicharts-line-chart" style="height:400px"></div>
+                 </div>
+             </div>
+        </div>
+        <div class="col-lg-5 col-md-5">
+             <div class="panel panel-default">
+                 <div class="panel-heading">
+                     	通知公告
+                 </div>
+                 
+                 <div class="panel-body">
+                     <table id="bootstrap-table" data-mobile-responsive="true"></table>
+                 </div>
+             </div>
+        </div>
+	</div>
+</div>
+<div th:include="include :: footer"></div>
+<!-- <script th:src="@{/js/highcharts/highcharts.js}"></script> -->
+<script th:src="@{/js/echarts/echarts.min.js}"></script>
+<script th:inline="javascript">
+// 基于准备好的dom，初始化echarts图表
+var myChart = echarts.init(document.getElementById('hicharts-line-chart')); 
+
+function stringToDate(dateStr,separator){
+    if(!separator){
+           separator="-";
+    }
+    var dateArr = dateStr.split(separator);
+    var year = parseInt(dateArr[0]);
+    var month;
+    //处理月份为04这样的情况                         
+    if(dateArr[1].indexOf("0") == 0){
+        month = parseInt(dateArr[1].substring(1));
+    }else{
+         month = parseInt(dateArr[1]);
+    }
+    var day = parseInt(dateArr[2]);
+    var date = new Date(year,month -1,day);
+    return date;
+}
+
+ //绘制清分检测数据折线图 最近一周 add by  hexuefeng 2019-01-10 
+ function drawSortLineChart(){
+	 //获取数据
+	 $.ajax({
+	        type: "GET",
+	   		url: ctx + "MainController" + "/MainController_getLastDaySortData",
+	        dataType: "json",
+	        success: function(resultData){
+	        	//alert(JSON.stringify(resultData));
+	        	var xAxis = [];
+	        	var group = [];
+	        	var arr = [];
+	        	
+	        	if(resultData && resultData["result"]){
+	        		var resultObj = resultData["result"];
+	        		if(resultObj["data"]&&resultObj["date"]&&resultObj["group"]){
+	        			//组数据
+	        			var dataArr  =  resultObj["data"];
+	        			//日期数据
+	        			xAxis = resultObj["date"];
+	        			//分组title
+	        			group = resultObj["group"];
+	        			//chart序列组装
+	        			arr = [];
+	        			for(var i in  dataArr){
+	        				var tmp = {};
+	        				//标题
+	        				tmp.name = group[i];
+	        				tmp.type='line';
+	        				//单序列数据
+	        				tmp.data=dataArr[i];
+	        				arr.push(tmp);
+	        			}
+	        		}
+	        	}
+
+    			var option = {
+    				    title : {
+    				    	x:'center',
+    				    	y:'top',
+    				        text: '清分业务监测',
+    				        subtext: '单位：万元',
+    				        show:true
+    				    }, grid: {
+    				        x: 70,     //图表距离左右上下之间的距离
+    				        y: 60,
+    				        x2: 50,
+    				        y2: 75,
+    				    },
+    				    noDataLoadingOption: {
+                            text: '暂无数据',
+                            effect: 'bubble',
+                            effectOption: {
+                                effect: {
+                                    n: 0
+                                }
+                            }
+     					},
+    				    tooltip : {
+    				        trigger: 'item',
+    				        formatter: "币值:"+'{a}<br />'+"日期:"+'{b}<br />'+"金额:"+'{c}万元'
+    				    },
+    				    legend: {
+    				    	 orient: 'horizontal', // 'vertical' horizontal
+    				         x: 'center', // 'center' | 'left' | {number},
+    				         y: 'bottom', // 'center' | 'bottom' | {number}
+    				         padding: 10,    // [5, 10, 15, 20]
+    				         borderWidth:1,
+    				         borderColor:'#ccc',
+    				         itemGap: 15,
+    				         data: group
+    				    },
+    				    toolbox: {
+    				        show : true,
+    				        feature : {
+    				            mark : {show: true},
+    				            dataView : {show: true, readOnly: false},
+    				            magicType : {show: true, type: ['line', 'bar']},
+    				            restore : {show: true},
+    				            saveAsImage : {show: true}
+    				        }
+    				    },
+    				    calculable : true,
+    				    xAxis : [
+    				        {
+    				            type : 'category',
+    				            boundaryGap : false,
+    				            axisLabel :{ interval:0},
+    				            name:'日期',
+    				            nameLocation:'end',
+    				            data : xAxis
+    				        }
+    				    ],
+    				    yAxis : [
+    				        {
+    				            type : 'value',
+    				            name:'金额（万元）',
+    				            nameLocation:'end',
+    				            axisLabel : {
+    				                formatter: '{value}'
+    				            }
+    				        }
+    				    ],
+    				    series : arr
+    				};
+    			// 为echarts对象加载数据 
+    			myChart.setOption(option); 
+	        }
+	    });
+ }
+
+
+//绘制折线图
+function doHighCharts() {
+	$.ajax({
+        type: "GET",
+   		url: ctx + "MainController" + "/MainController_selectSevenDaySortAmt",
+        dataType: "json",
+        success: function(resultData){
+        	var myDateStr=resultData.statDateStart;
+        	var myDate=stringToDate(myDateStr);
+        	var data=resultData.mainPageCurrScStatDayList;
+        	var series = [];
+        	var hundredSortAmt = [];
+        	var fiftySortAmt = [];
+        	var twentySortAmt = [];
+        	var tenSortAmt = [];
+        	var fiveSortAmt = [];
+        	var oneSortAmt = [];
+        	for(var i=1;i<= data.length;i++){
+        		hundredSortAmt.push(data[data.length-i].hundredSortAmt/10000);
+        		fiftySortAmt.push(data[data.length-i].fiftySortAmt/10000);
+        		twentySortAmt.push(data[data.length-i].twentySortAmt/10000);
+        		tenSortAmt.push(data[data.length-i].tenSortAmt/10000);
+        		fiveSortAmt.push(data[data.length-i].fiveSortAmt/10000);
+        		oneSortAmt.push(data[data.length-i].oneSortAmt/10000);
+        	}
+        	series.push(
+        		{
+	        		name: '100元券',
+					data: hundredSortAmt
+				},
+				{
+					name: '50元券',
+					data: fiftySortAmt
+				},
+				{
+					name: '20元券',
+					data: twentySortAmt
+				},
+				{
+					name: '10元券',
+					data: tenSortAmt
+				},
+				{
+					name: '5元券',
+					data: fiveSortAmt
+				},
+				{
+					name: '1元券',
+					data: oneSortAmt
+				}
+        	);
+        	var chart = Highcharts.chart('hicharts-line-chart', {
+        		tooltip:{
+        			   formatter:function(){
+        			      return Highcharts.dateFormat('%Y年%m月%d日',this.x) +
+        			      		 '<br/><strong>'+this.series.name+'</strong><br/>'+
+        			         	  this.y+'万元';
+        			   }
+        		},
+        		title: {
+        			text: ''
+        		},
+        		xAxis : {
+        			 type: 'datetime',
+        	         dateTimeLabelFormats: { 
+        	             day: '%d日',
+        	    	 }
+        		},
+        		yAxis: {
+        			title: {
+        				text: ''
+        			}
+        		},
+        		legend: {
+        			layout: 'vertical',
+        			align: 'right',
+        			verticalAlign: 'middle'
+        		},
+        		plotOptions: {
+        			series: {
+        				label: {
+        					connectorAllowed: false
+        				},
+        				// 数据点间隔， 开始值
+        				pointStart: Date.UTC(myDate.getFullYear(), myDate.getMonth(), myDate.getDate()),
+        				// 间隔一天
+        	            pointInterval: 24 * 3600 * 1000
+        	         	
+        			}
+        		},
+        		series: series,
+        		responsive: {
+        			rules: [{
+        				condition: {
+        					maxWidth: 500
+        				},
+        				chartOptions: {
+        					legend: {
+        						layout: 'horizontal',
+        						align: 'center',
+        						verticalAlign: 'bottom'
+        					}
+        				}
+        			}]
+        		}
+        	});
+        }
+    });
+}
+var prefix = ctx + "MainController";
+var types = [[${@dict.getType('sys_notice_type')}]];
+var options = {
+        url: prefix + "/MainController_listNoticePage",
+        modalName: "公告",
+        search: false,
+        showRefresh:false,
+        showColumns:false,
+        showToggle:false,
+        showExport:false,
+        columns: [
+		{
+			field : 'id',
+			title : '序号',
+			visible: false
+		},
+		{
+			field : 'noticeTitle', 
+			title : '标题',
+			width : '60%',
+			formatter: function(value, row, index) {
+					if(value.length>15){
+						return $.table.selectDictLabel(types, row.noticeType)+"  <a href='javascript:void(0)' style='text-decoration:underline;'>"+value.substr(0,15)+"...</a>";	
+					}else{
+						return $.table.selectDictLabel(types, row.noticeType)+"  <a href='javascript:void(0)' style='text-decoration:underline;'>"+value +"</a>";
+					}
+	        }
+		},
+		{
+            field: 'noticeType',
+            title: '公告类型',
+            align: 'center',
+            visible: false,
+            formatter: function(value, row, index) {
+            	return $.table.selectDictLabel(types, value);
+            }
+        }, 
+		{
+            field: 'status',
+            title: '状态',
+            align: 'center',
+            visible: false,
+            formatter: function(value, row, index) {
+            	return $.table.selectDictLabel(datas, value);
+            }
+        },
+		{
+			field : 'createUserName',
+			title : '创建者' ,
+			visible: false
+		},
+		{
+            field: 'createTime',
+            title: '创建时间',
+            align: 'center',
+            sortable: true
+        }
+       ]
+    };
+
+// 加载证书失效预警数量
+function loadProfessionCwarnCount() {
+    var $cwarnCountBox = $('#professionCwarnCount');
+    $cwarnCountBox.hide();
+    $.get(ctx + 'ProfessionCwarnController/ProfessionCwarnController_getWarningCount?t=' + (new Date()).getTime(), function(retData) {
+        var count = retData.staffCount || 0;
+
+        if (count == 0) {
+            return;
+        }
+        var deptName = retData.deptName || '该部门';
+
+        $cwarnCountBox
+             .attr('title', '点击查看明细')
+             .html(deptName + '有 <a href="javascript:void(0);">' + count + '</a> 个从业人员反假货币知识培训考试合格证已失效，请关注！');
+
+        $cwarnCountBox.find('a')
+            .css('font-size', '1.2')
+            .css('text-decoration', 'underline')
+            .css('cursor', 'hand')
+            .on('click', function() {
+            var url = ctx + 'ProfessionCwarnController/ProfessionCwarnController_goMain';
+            createMenuItem(url, '证书失效预警');
+        });
+
+        $cwarnCountBox.show();
+    });
+}
+    
+
+$(function () {
+	/* 清分业务监测图表绘制 */
+	//doHighCharts();
+	drawSortLineChart();
+	/* 通知公告数据加载 */
+	$.table.init(options);
+	$('#bootstrap-table').on('click-row.bs.table', function (e, row, element){
+		var url = prefix + '/MainController_goNoticeView/' + row.id;
+	    $.modal.open("查看通知信息", url);
+	});
+
+    loadProfessionCwarnCount();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: mysql
+    #数据库
+  datasource:
+    url: jdbc:mysql://192.168.1.103:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+#mq配置
+mq:
+   #activemq配置
+  activemq: 
+    #开启标识
+    enabled: true
+    #activemq服务地址
+    broker-url: tcp://localhost:61616
+    #权限用户
+    username: admin
+    #权限密码
+    password: admin
+    #内存
+    in-memory: true
+    #缓存数量
+    session-cache-size: 20
+    #缓存数量
+    pool-max-connections: 40
+    pool-max-active: 40
+    pool-expiry-timeout: 0
+    pool-idle-timeout: 30000

@@ -1,0 +1,105 @@
+package ${package}.controller;
+
+import java.util.List;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.douples.framework.annotation.Log;
+import com.douples.framework.constant.BusinessType;
+import ${package}.dto.${className}DTO;
+import ${package}.service.${className}Service;
+import com.douples.framework.web.controller.BaseController;
+import com.douples.framework.web.page.PageBean;
+import com.douples.framework.annotation.EnablePage;
+import com.douples.framework.web.domain.AjaxResult;
+
+/**
+ * ${tableComment} 信息操作处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${className}Controller")
+public class ${className}Controller extends BaseController{
+    private String prefix = "${moduleName}/${classname}";
+	
+	@Autowired
+	private ${className}Service ${classname}Service;
+	
+	@RequiresPermissions("${moduleName}:${fullLowerClassName}:view")
+	@GetMapping("/${className}Controller_goMain")
+	public String goMain(){
+	    return prefix + "/${className}Controller_goMain";
+	}
+	
+	/**
+	 * 查询${tableComment}列表
+	 */
+	@RequiresPermissions("${moduleName}:${fullLowerClassName}:list")
+	@PostMapping("/${className}Controller_listPage")
+	@ResponseBody
+	@EnablePage
+	public PageBean listPage(${className}DTO ${classname}){
+        List<${className}DTO> list = ${classname}Service.select${className}List(${classname});
+		return getPageBean(list);
+	}
+	
+	/**
+	 * 新增${tableComment}
+	 */
+	@GetMapping("/${className}Controller_goAdd")
+	public String goAdd(){
+	    return prefix + "/${className}Controller_goAdd";
+	}
+	
+	/**
+	 * 新增保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${fullLowerClassName}:add")
+	@Log(title = "${tableComment}", action = BusinessType.INSERT)
+	@PostMapping("/${className}Controller_doAdd")
+	@ResponseBody
+	public AjaxResult doAdd(${className}DTO ${classname}){		
+		return toAjax(${classname}Service.insert${className}(${classname}));
+	}
+
+	/**
+	 * 修改${tableComment}
+	 */
+	@GetMapping("/${className}Controller_goEdit/{id}")
+	public String goEdit(@PathVariable("id") ${primaryKey.attrType} id, ModelMap mmap){
+		${className}DTO ${classname} = ${classname}Service.select${className}ById(${primaryKey.attrname});
+		mmap.put("${classname}", ${classname});
+	    return prefix + "/${className}Controller_goEdit";
+	}
+	
+	/**
+	 * 修改保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${fullLowerClassName}:edit")
+	@Log(title = "${tableComment}", action = BusinessType.UPDATE)
+	@PostMapping("/${className}Controller_doEdit")
+	@ResponseBody
+	public AjaxResult doEdit(${className}DTO ${classname}){		
+		return toAjax(${classname}Service.update${className}(${classname}));
+	}
+	
+	/**
+	 * 删除${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${fullLowerClassName}:remove")
+	@Log(title = "${tableComment}", action = BusinessType.DELETE)
+	@PostMapping( "/${className}Controller_doDelete")
+	@ResponseBody
+	public AjaxResult doDelete(String ids){		
+		return toAjax(${classname}Service.delete${className}ByIds(ids));
+	}
+	
+}
