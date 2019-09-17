@@ -1,5 +1,6 @@
-package com.fast.core.utils;
+package com.fast.framework.piinyin4j;
 
+import com.fast.core.utils.StringUtils;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;

@@ -10,13 +10,43 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>framework</artifactId>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <mp.version>3.2.0</mp.version>
+        <commons.net.version>2.2</commons.net.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.fast</groupId>
             <artifactId>core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--拼音转换工具-->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
     </dependencies>
-
-
 </project>

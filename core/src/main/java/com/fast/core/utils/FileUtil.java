@@ -1,8 +1,6 @@
 package com.fast.core.utils;
 
 import org.apache.commons.io.IOUtils;
-import sun.nio.ch.IOUtil;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.ByteBuffer;
