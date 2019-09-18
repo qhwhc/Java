@@ -1,7 +1,6 @@
 package com.fast.velocity.service;
 
 
-import com.fast.velocity.dto.ColumnInfoDTO;
 import com.fast.velocity.dto.TableInfoDTO;
 
 import java.util.List;

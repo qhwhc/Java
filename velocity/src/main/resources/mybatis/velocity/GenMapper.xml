@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+
 	<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
 		<include refid="selectGenVo"/>
 		WHERE TABLE_COMMENT <![CDATA[ <> ]]> '' AND TABLE_SCHEMA = (SELECT DATABASE())

@@ -75,7 +75,7 @@ public class ${className}Controller extends BaseController{
 	 */
 	@GetMapping("/${className}Controller_goEdit/{id}")
 	public String goEdit(@PathVariable("id") ${primaryKey.attrType} id, ModelMap mmap){
-		${className}DTO ${classname} = ${classname}Service.select${className}ById(${primaryKey.attrname});
+		${className}DTO ${classname} = ${classname}Service.select${className}ById(id);
 		mmap.put("${classname}", ${classname});
 	    return prefix + "/${className}Controller_goEdit";
 	}

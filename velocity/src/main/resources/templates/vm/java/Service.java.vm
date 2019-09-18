@@ -13,7 +13,7 @@ public interface ${className}Service{
 	/**
      * 查询${tableComment}信息
      * 
-     * @param ${primaryKey.attrname} ${tableComment}ID
+     * @param id ${tableComment}ID
      * @return ${tableComment}信息
      */
 	public ${className}DTO select${className}ById(${primaryKey.attrType} id);

@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="${column.attrname}"    column="${column.columnName}"    />
 #end
     </resultMap>
-	
+
 	<sql id="select${className}Vo">
         select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
     </sql>
@@ -18,8 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="select${className}Vo"/>
         <where>  
 #foreach($column in $columns)
+#if($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
+            <if test="$column.attrname != null"> and $column.columnName = #{$column.attrname}</if>
+#else
             <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
- #end
+#end
+#end
         </where>
     </select>
     
@@ -33,15 +37,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
+#if($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
+            <if test="$column.attrname != null">$column.columnName,</if>
+#else
+            <if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
+#end
 #end
 #end
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname},</if>
-#end			
+#if($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
+            <if test="$column.attrname != null">$column.columnName,</if>
+#else
+            <if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
+#end
+#end
 #end
          </trim>
     </insert>
@@ -50,15 +62,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update ${tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName)
+#if         ($column.columnName != $primaryKey.columnName)
+#if         ($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
+            <if test="$column.attrname != null">$column.columnName = #{$column.attrname},</if>
+#else
             <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">$column.columnName = #{$column.attrname},</if>
+#end
 #end
 #end
         </trim>
         where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </update>
 
-	<delete id="delete${className}ById" parameterType="${primaryKey.attrType}">
+    <delete id="delete${className}ById" parameterType="${primaryKey.attrType}">
         delete from ${tableName} where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </delete>
 	

@@ -30,6 +30,11 @@ public class GeneratorTest {
 
     @Test
     public void gen2Zip(){
-        genService.generatorCode2Zip("t_sys_user","C:\\Users\\ASUS\\Desktop\\GenCode\\test\\user.zip");
+        genService.generatorCode2Zip("t_report_analyze_header","C:\\Users\\ASUS\\Desktop\\GenCode\\test\\t_report_analyze_header.zip");
+    }
+
+    @Test
+    public void testTableDao(){
+        genService.selectTableList(null).forEach(System.out::println);
     }
 }
