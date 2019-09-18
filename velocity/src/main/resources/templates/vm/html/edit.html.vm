@@ -26,7 +26,7 @@
     </div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
-		var prefix = ctx + "${moduleName}/${classname}"
+		var prefix = ctx + "${moduleName}/${fullLowerClassName}"
 		$("#form-${classname}-edit").validate({
 			rules:{
 				xxxx:{

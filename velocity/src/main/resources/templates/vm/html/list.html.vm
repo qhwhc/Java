@@ -13,7 +13,7 @@
 			</a>
 		</div>
 			
-		<div class="col-sm-12 select-info table-striped">
+		<div class="col-sm-12 select-info table-bordered">
 			<table id="bootstrap-table" data-mobile-responsive="true"></table>
 		</div>
     </div>
@@ -21,7 +21,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('${moduleName}:${classname}:edit')}]];
         var removeFlag = [[${@permission.hasPermi('${moduleName}:${classname}:remove')}]];
-        var prefix = ctx + "${moduleName}/${classname}"
+        var prefix = ctx + "${moduleName}/${fullLowerClassName}"
 
         $(function() {
             var options = {
@@ -30,9 +30,21 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 modalName: "${tableComment}",
+				striped:true,//条纹状
                 columns: [{
 		            checkbox: true
 		        },
+				{
+					field : 'rowId',
+					title : '序号',
+					valign : 'middle',
+					width : 30,
+					align : 'center',
+					formatter : function(value, row, index) {
+						row.rowId = index;
+						return index + 1;
+					}
+				},
 #foreach($column in $columns)
 				{
 					field : '${column.attrname}', 

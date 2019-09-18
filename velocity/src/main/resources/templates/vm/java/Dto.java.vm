@@ -20,8 +20,10 @@ public class ${className}DTO extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 #foreach ($column in $columns)
+#if($column.attrname != "createDate" && $column.attrname != "createTime" && $column.attrname != "updateDate" && $column.attrname != "updateTime" && $column.attrname != "createUserId" && $column.attrname != "createUserName" && $column.attrname != "updateUserId" && $column.attrname != "updateUserName")
 	/** $column.columnComment */
 	private $column.attrType $column.attrname;
+#end
 #end
 #*#foreach ($column in $columns)
 	public void set${column.attrName}($column.attrType $column.attrname){
