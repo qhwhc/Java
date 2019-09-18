@@ -28,7 +28,7 @@ import com.douples.framework.web.domain.AjaxResult;
 @Controller
 @RequestMapping("/${className}Controller")
 public class ${className}Controller extends BaseController{
-    private String prefix = "${moduleName}/${classname}";
+    private String prefix = "${moduleName}/${fullLowerClassName}";
 	
 	@Autowired
 	private ${className}Service ${classname}Service;
