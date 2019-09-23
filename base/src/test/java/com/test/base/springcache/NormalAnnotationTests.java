@@ -1,10 +1,12 @@
-package com;
+package com.test.base.springcache;
 
-import com.demo.CacheEvictDemo;
-import com.demo.CachePutDemo;
-import com.demo.CacheableDemo;
-import com.demo.CachingDemo;
-import com.model.User;
+
+import com.fast.BaseApplication;
+import com.fast.springcache.demo.CacheEvictDemo;
+import com.fast.springcache.demo.CachePutDemo;
+import com.fast.springcache.demo.CacheableDemo;
+import com.fast.springcache.demo.CachingDemo;
+import com.fast.springcache.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Random;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 public class NormalAnnotationTests {
 
 
@@ -31,26 +33,26 @@ public class NormalAnnotationTests {
     CachingDemo cachingDemo;
 
     @Test
-    public  void cacheableDemoTest() {
+    public void cacheableDemoTest() {
         User user = User.builder().name("张三").age(18).motto("蚂蚁牙黑！").build();
         System.out.println(cacheableDemo.fa("abc", user));
     }
 
     @Test
-    public  void cachePutDemoTest() {
+    public void cachePutDemoTest() {
         Integer i = new Random().nextInt(10000);
         Integer res = cachePutDemo.fa(i);
         System.out.println(res);
     }
 
     @Test
-    public  void cacheEvictDemoTest() {
+    public void cacheEvictDemoTest() {
         String res = cacheEvictDemo.fa("ppap");
         System.out.println(res);
     }
 
     @Test
-    public  void cachingDemoTest() {
+    public void cachingDemoTest() {
         Integer res = cachingDemo.fa(9527);
         System.out.println(res);
     }

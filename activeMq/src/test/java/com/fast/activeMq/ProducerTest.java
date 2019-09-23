@@ -20,6 +20,7 @@ import java.util.Random;
 public class ProducerTest {
     @Autowired
     ProducerTool producerTool;
+
     @Test
     public void producerTest() throws JMSException, InterruptedException {
         Random random = new Random();
@@ -31,15 +32,15 @@ public class ProducerTest {
     }
 
     /**
+     * @return void
      * @Author cyb
      * @Description mq压力测试
-     * @Date 2019/8/29 9:35 
+     * @Date 2019/8/29 9:35
      * @Param []
-     * @return void
      **/
     @Test
     public void activePreTest1() throws JMSException {
-        for (int i = 0; i < 100000; i ++){
+        for (int i = 0; i < 100000; i++) {
             producerTool.produceMessage(i + ". Hello,AcitveMq!");
             producerTool.close();
         }

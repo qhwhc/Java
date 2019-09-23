@@ -1,6 +1,7 @@
-package com;
+package com.test.base.springcache;
 
-import com.demo.ConditionAndCacheNamesDemo;
+import com.fast.BaseApplication;
+import com.fast.springcache.demo.ConditionAndCacheNamesDemo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 public class ConditionTests {
 
 
@@ -17,13 +18,13 @@ public class ConditionTests {
 
     /**
      * methodOne无condition条件
-     *
+     * <p>
      * methodTwo需要验证condition条件
      *
      * @date 2019/4/13 11:55
      */
     @Test
-    public  void testVoidCacheOne() {
+    public void testVoidCacheOne() {
         // -------------------------> 测试condition不成立的情况
         // 向缓存中 存入 key为 'xyz',(返回)值为'XYZ'的键值对缓存
         demo.methodOne("xyz");
@@ -47,7 +48,7 @@ public class ConditionTests {
 
 
     @Test
-    public  void testVoidCacheABC() {
+    public void testVoidCacheABC() {
         // 我那个命名空间TestConditionSpaceA中存入key为'abcd',值为'value-A'的数据
         demo.methodA();
         // 我那个命名空间TestConditionSpaceB中存入key为'abcd',值为'value-B'的数据

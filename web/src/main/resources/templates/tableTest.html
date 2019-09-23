@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="col-sm-12 select-info table-striped">
+        <table id="bootstrap-table" data-mobile-responsive="true"></table>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<!--下拉框插件-->
+<script th:src="@{/ajax/libs/select/select2.js}"></script>
+<script th:inline="javascript">
+    var sid = [[${reportAnalyzeDetailDTO.sID}]];
+    var options = {
+        url: prefix + "/ReportAnalyzeDetailController_goDetailMain/" + sid,
+        modalName: "表格测试",
+        search: false,
+        columns: [
+            {
+                field: 'rowId',
+                title: '序号',
+                valign: 'middle',
+                width: 30,
+                align: 'center',
+                formatter: function (value, row, index) {
+                    row.rowId = index;
+                    return index + 1;
+                }
+            },
+            {
+                field: 'iD',
+                title: '主键',
+                align: 'center',
+                visible: false
+            },
+            {
+                field: 'rptName',
+                title: '报表名称',
+                align: 'center',
+            }]
+    };
+    $(function () {
+        $.table.init(options);
+    });
+
+    /*
+* 下拉框插件设置
+*/
+    $("#rptInfo").select2({
+        placeholder: '所有',
+        allowClear: true,
+        width: 400,
+    })
+
+</script>
 </body>
 </html>

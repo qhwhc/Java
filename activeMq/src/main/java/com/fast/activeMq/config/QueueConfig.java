@@ -16,13 +16,13 @@ public class QueueConfig {
 
     //定义存放消息的队列
     @Bean
-    public Queue queue(){
+    public Queue queue() {
         return new ActiveMQQueue("TestSpringMq");
     }
 
     //定义存放消息的队列
     @Bean
-    public Queue testPropertiesQueue(){
+    public Queue testPropertiesQueue() {
         return new ActiveMQQueue("TestSpringMq_1");
     }
 }

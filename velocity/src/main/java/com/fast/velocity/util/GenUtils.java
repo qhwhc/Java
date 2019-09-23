@@ -1,4 +1,5 @@
 package com.fast.velocity.util;
+
 import com.fast.core.constant.Constants;
 import com.fast.core.constant.DataTypeMap;
 import com.fast.core.utils.StringUtils;
@@ -11,16 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenUtils {
-    private static final String MYBATIS_PATH = "main/resources/mybatis";
-    private static final String PROJECT_PATH = "main/java/com/douples/busi";
-    private static final String TEMPLATES_PATH = "main/resources/templates";
+    private static final String MYBATIS_PATH = "main/resources/mybatis" ;
+    private static final String PROJECT_PATH = "main/java/com/douples/busi" ;
+    private static final String TEMPLATES_PATH = "main/resources/templates" ;
 
     public static List<ColumnInfoDTO> transColums(List<ColumnInfoDTO> columns) {
         List<ColumnInfoDTO> columsList = new ArrayList();
         for (ColumnInfoDTO column : columns) {
             String attrName = StringUtils.convertToCamelCase(column.getColumnName());
             column.setAttrName(attrName);
-            column.setAttrname(StringUtils.uncapitalize(attrName));
+            //id特殊特殊处理
+            if ("iD".equals(StringUtils.uncapitalize(attrName))) {
+                column.setAttrname("id");
+            } else {
+                column.setAttrname(StringUtils.uncapitalize(attrName));
+            }
             column.setAttrType(DataTypeMap.dataTypeMap.get(column.getDataType()));
             columsList.add(column);
         }
@@ -72,38 +78,38 @@ public class GenUtils {
         String classname = table.getClazzName();
         String classNameLowerCase = classname.toLowerCase();
         String className = table.getClassName();
-        String javaPath = PROJECT_PATH + "/" + moduleName + "/";
+        String javaPath = PROJECT_PATH + "/" + moduleName + "/" ;
         String mybatisPath = MYBATIS_PATH + "/" + moduleName + "/" + className;
         String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classNameLowerCase;
         if (StringUtils.isNotEmpty(classname)) {
-            javaPath = javaPath + classNameLowerCase.replace(".", "/") + "/";
+            javaPath = javaPath + classNameLowerCase.replace(".", "/") + "/" ;
         }
         if (template.contains("Dto.java.vm")) {
-            return javaPath + "dto/" + className + "DTO.java";
+            return javaPath + "dto/" + className + "DTO.java" ;
         }
         if (template.contains("Dao.java.vm")) {
-            return javaPath + "dao/" + className + "Dao.java";
+            return javaPath + "dao/" + className + "Dao.java" ;
         }
         if (template.contains("Service.java.vm")) {
-            return javaPath + "service/" + className + "Service.java";
+            return javaPath + "service/" + className + "Service.java" ;
         }
         if (template.contains("ServiceImpl.java.vm")) {
-            return javaPath + "service/impl/" + className + "ServiceImpl.java";
+            return javaPath + "service/impl/" + className + "ServiceImpl.java" ;
         }
         if (template.contains("Controller.java.vm")) {
-            return javaPath + "controller/" + className + "Controller.java";
+            return javaPath + "controller/" + className + "Controller.java" ;
         }
         if (template.contains("Mapper.xml.vm")) {
-            return mybatisPath + "Mapper.xml";
+            return mybatisPath + "Mapper.xml" ;
         }
         if (template.contains("list.html.vm")) {
-            return htmlPath + "/" + className + "Controller_goMain.html";
+            return htmlPath + "/" + className + "Controller_goMain.html" ;
         }
         if (template.contains("add.html.vm")) {
-            return htmlPath + "/" + className + "Controller_goAdd.html";
+            return htmlPath + "/" + className + "Controller_goAdd.html" ;
         }
         if (template.contains("edit.html.vm")) {
-            return htmlPath + "/" + className + "Controller_goEdit.html";
+            return htmlPath + "/" + className + "Controller_goEdit.html" ;
         }
         return null;
     }

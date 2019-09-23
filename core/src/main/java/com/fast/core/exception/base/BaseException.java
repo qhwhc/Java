@@ -1,8 +1,6 @@
 package com.fast.core.exception.base;
 
 
-
-import com.fast.core.support.StrFormatter;
 import com.fast.core.utils.MessageUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,7 +62,5 @@ public class BaseException extends RuntimeException {
         return this.defaultMessage;
     }
 
-    public String toString() {
-        return getClass() + "{module='" + this.module + '\'' + ", message='" + getMessage() + '\'' + StrFormatter.C_DELIM_END;
-    }
+
 }

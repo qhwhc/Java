@@ -18,10 +18,10 @@ public class ProducerTool {
     private String user;
     @Value("${mq.activemq.password}")
     private String password;
-//    private String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+    //    private String url = ActiveMQConnection.DEFAULT_BROKER_URL;
     @Value("${mq.activemq.broker-url}")
     private String url;
-    private String subject = "mytopic";
+    private String subject = "mytopic" ;
 
     private ActiveMQConnectionFactory activeMQConnectionFactory = null;
     private Connection connection = null;
@@ -31,7 +31,7 @@ public class ProducerTool {
 
     //初始化
     private void initialize() throws JMSException {
-        activeMQConnectionFactory = new ActiveMQConnectionFactory(user,password,url);
+        activeMQConnectionFactory = new ActiveMQConnectionFactory(user, password, url);
         connection = activeMQConnectionFactory.createConnection();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         destination = session.createTopic(subject);
@@ -52,8 +52,8 @@ public class ProducerTool {
     //关闭连接
     public void close() throws JMSException {
         System.out.println("Producer close connection!");
-        if(producer != null) producer.close();
-        if(session != null) session.close();
-        if(connection != null) connection.close();
+        if (producer != null) producer.close();
+        if (session != null) session.close();
+        if (connection != null) connection.close();
     }
 }

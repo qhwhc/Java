@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface TableDao{
+public interface TableDao {
     List<Table> selectTables();
 }

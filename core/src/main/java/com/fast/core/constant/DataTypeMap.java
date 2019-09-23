@@ -9,12 +9,13 @@ public class DataTypeMap {
     static {
         initDataTypeMap();
     }
+
     /**
+     * @return void
      * @Author cyb
      * @Description mysql-java 类型转换
      * @Date 2019/7/31 16:40
      * @Param []
-     * @return void
      **/
     public static void initDataTypeMap() {
         dataTypeMap.put("tinyint", "Integer");

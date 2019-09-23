@@ -19,7 +19,7 @@ public class NetNioTest {
 
     @Test
     public void client() throws IOException {
-        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1",7498));
+        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", 7498));
 
         // 切换成非 阻塞模式
         socketChannel.configureBlocking(false);
@@ -28,7 +28,7 @@ public class NetNioTest {
 
         ByteBuffer clientBuffer = ByteBuffer.allocate(1024);
 
-        while (inputChannel.read(clientBuffer) != -1){
+        while (inputChannel.read(clientBuffer) != -1) {
             clientBuffer.flip();
             socketChannel.write(clientBuffer);
             clientBuffer.clear();
@@ -48,7 +48,7 @@ public class NetNioTest {
 
         serverSocketChannel.bind(new InetSocketAddress(7498));
 
-        FileChannel outputChannel = FileChannel.open(Paths.get("C:\\Users\\admin\\Desktop\\test.md"),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+        FileChannel outputChannel = FileChannel.open(Paths.get("C:\\Users\\admin\\Desktop\\test.md"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
 
 
         // 选择器
@@ -58,28 +58,28 @@ public class NetNioTest {
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
         // 轮巡式获得选择器里的已经准备就绪的事件
-        while (selector.select() > 0 ){
+        while (selector.select() > 0) {
 
             // 获取已经就绪的监听事件
-            Iterator<SelectionKey> selectorIterator =  selector.selectedKeys().iterator();
+            Iterator<SelectionKey> selectorIterator = selector.selectedKeys().iterator();
 
             // 迭代获取
-            while (selectorIterator.hasNext()){
+            while (selectorIterator.hasNext()) {
                 // 获取准备就绪的事件
 
                 SelectionKey key = selectorIterator.next();
 
                 SocketChannel socketChannel = null;
                 // 判断是什么事件
-                if (key.isAcceptable()){
+                if (key.isAcceptable()) {
                     // 或接受就绪，，则获取客户端连接
                     socketChannel = serverSocketChannel.accept();
 
                     //切换非阻塞方式
                     socketChannel.configureBlocking(false);
                     // 注册到选择器上
-                    socketChannel.register(selector,SelectionKey.OP_READ);
-                } else if (key.isReadable()){
+                    socketChannel.register(selector, SelectionKey.OP_READ);
+                } else if (key.isReadable()) {
                     // 获取读就绪通道
                     SocketChannel readChannel = (SocketChannel) key.channel();
 
@@ -87,9 +87,9 @@ public class NetNioTest {
                     ByteBuffer readBuffer = ByteBuffer.allocate(1024);
 
                     int len = 0;
-                    while ( (len = readChannel.read(readBuffer)) != -1){
+                    while ((len = readChannel.read(readBuffer)) != -1) {
                         readBuffer.flip();
-                        System.out.println(new String(readBuffer.array(),0,len));
+                        System.out.println(new String(readBuffer.array(), 0, len));
                         outputChannel.write(readBuffer);
                         readBuffer.clear();
                     }
@@ -113,40 +113,40 @@ public class NetNioTest {
 
         datagramChannel.configureBlocking(false);
 
-        String str = "随便写写，测试一下";
+        String str = "随便写写，测试一下" ;
 
         ByteBuffer sendBuffer = ByteBuffer.allocate(1024);
         sendBuffer.put(str.getBytes());
         sendBuffer.flip();
 
-        datagramChannel.send(sendBuffer,new InetSocketAddress("127.0.0.1",7498));
+        datagramChannel.send(sendBuffer, new InetSocketAddress("127.0.0.1", 7498));
         sendBuffer.clear();
 
         datagramChannel.close();
     }
 
     @Test
-    public void recive() throws IOException{
+    public void recive() throws IOException {
         DatagramChannel datagramChannel = DatagramChannel.open();
         datagramChannel.configureBlocking(false);
         datagramChannel.bind(new InetSocketAddress(7498));
 
         Selector selector = Selector.open();
 
-        datagramChannel.register(selector,SelectionKey.OP_READ);
+        datagramChannel.register(selector, SelectionKey.OP_READ);
 
-        while (selector.select() > 0){
+        while (selector.select() > 0) {
             Iterator<SelectionKey> selectionKeyIterator = selector.selectedKeys().iterator();
 
-            while (selectionKeyIterator.hasNext()){
+            while (selectionKeyIterator.hasNext()) {
                 SelectionKey key = selectionKeyIterator.next();
 
-                if (key.isReadable()){
+                if (key.isReadable()) {
                     ByteBuffer reciveBuffer = ByteBuffer.allocate(1024);
 
                     datagramChannel.receive(reciveBuffer);
                     reciveBuffer.flip();
-                    System.out.println(new String(reciveBuffer.array(),0,reciveBuffer.limit()));
+                    System.out.println(new String(reciveBuffer.array(), 0, reciveBuffer.limit()));
                     reciveBuffer.clear();
                 }
             }
@@ -173,7 +173,7 @@ public class NetNioTest {
         Pipe.SourceChannel sourceChannel = pipe.source();
         buffer.flip();
 
-        System.out.println(new String(buffer.array(),0,sourceChannel.read(buffer)));
+        System.out.println(new String(buffer.array(), 0, sourceChannel.read(buffer)));
 
         sinkChannel.close();
         sourceChannel.close();

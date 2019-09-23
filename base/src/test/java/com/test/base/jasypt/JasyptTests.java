@@ -1,26 +1,21 @@
 package com.test.base.jasypt;
 
-import com.aspire.ssm.model.User;
-import com.aspire.ssm.service.AbcService;
+import com.fast.BaseApplication;
 import com.ulisesbocchio.jasyptspringboot.encryptor.SimpleAsymmetricConfig;
 import com.ulisesbocchio.jasyptspringboot.encryptor.SimpleAsymmetricStringEncryptor;
 import com.ulisesbocchio.jasyptspringboot.util.AsymmetricCryptography;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 @Slf4j
-public class SsmApplicationTests {
-    
-
+public class JasyptTests {
     /**
      * 对称加密， 根据密钥，【明文生成密文】示例
      *
@@ -33,7 +28,7 @@ public class SsmApplicationTests {
         // 设置对称加密的 加解密 密钥
         textEncryptor.setPassword("hello~JustryDeng!");
 
-        String info = "dengshuai";
+        String info = "dengshuai" ;
         log.info("加密前" + info);
         // 加密
         String result = textEncryptor.encrypt(info);
@@ -57,7 +52,7 @@ public class SsmApplicationTests {
         config.setPublicKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMXf4CXQ/xbZaNSkGfO8NhzbxREWOAhCw35J/Nmz0uiyFV5/iXTN7GZA4Xq1kcAWnIoDuUHt93dvgNRpMP98kwJf4uSIMABueGlxpjoc5kwhTVxlBKshcYliMmqFDUGQX4cNJq+r/rAd1SKYE/Fj20XYxVP4zPCTw5+OSmRa1bFQIDAQAB");
         StringEncryptor encryptor = new SimpleAsymmetricStringEncryptor(config);
 
-        String info = "dengshuai";
+        String info = "dengshuai" ;
         log.info("加密前" + info);
         // 加密
         String result = encryptor.encrypt(info);

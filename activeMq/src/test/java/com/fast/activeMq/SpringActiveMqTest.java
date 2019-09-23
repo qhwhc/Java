@@ -26,30 +26,32 @@ public class SpringActiveMqTest {
     private Queue testPropertiesQueue;
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
+
     @Test
     public void mqSendTest() throws Exception {
         System.out.println("发送成功");
-        jmsMessagingTemplate.convertAndSend(queue,"SpringBootJmsTest" + new Date());
+        jmsMessagingTemplate.convertAndSend(queue, "SpringBootJmsTest" + new Date());
         Thread.sleep(3000);
     }
+
     @Test
     public void mqSendTest2() throws Exception {
         System.out.println("发送成功");
-        jmsMessagingTemplate.convertAndSend(testPropertiesQueue,"SpringBootJmsTest" + new Date());
+        jmsMessagingTemplate.convertAndSend(testPropertiesQueue, "SpringBootJmsTest" + new Date());
         Thread.sleep(3000);
     }
 
     /**
+     * @return void
      * @Author cyb
      * @Description spring整合mq压力测试
-     * @Date 2019/8/29 9:39 
+     * @Date 2019/8/29 9:39
      * @Param []
-     * @return void
      **/
     @Test
-    public void mePreTest1(){
-        for (int i = 0; i < 100000; i ++){
-            jmsMessagingTemplate.convertAndSend(queue,"SpringBootJmsTest" + i);
+    public void mePreTest1() {
+        for (int i = 0; i < 100000; i++) {
+            jmsMessagingTemplate.convertAndSend(queue, "SpringBootJmsTest" + i);
         }
     }
 }

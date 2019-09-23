@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fast.mysql.tableData.dao.TableDao">
-  <resultMap id="BaseResultMap" type="com.fast.mysql.tableData.pojo.Table">
-    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
-    <result column="table_comment" jdbcType="VARCHAR" property="tableComment" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    `table_name`, `table_comment`
-  </sql>
-  <select id="selectTables"  resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tables where table_schema = 'syscash_pb'
-  </select>
+    <resultMap id="BaseResultMap" type="com.fast.mysql.tableData.pojo.Table">
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="table_comment" jdbcType="VARCHAR" property="tableComment"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `table_name`, `table_comment`
+    </sql>
+    <select id="selectTables" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tables where table_schema = 'syscash_pb'
+    </select>
 </mapper>

@@ -21,7 +21,7 @@ public class ConsumerTool implements ExceptionListener, MessageListener {
     @Value("${mq.activemq.broker-url}")
     private String url;
 
-    private String subject = "mytopic";
+    private String subject = "mytopic" ;
 
     private ActiveMQConnectionFactory activeMQConnectionFactory = null;
     private Connection connection = null;
@@ -32,7 +32,7 @@ public class ConsumerTool implements ExceptionListener, MessageListener {
 
     //初始化
     private void initialize() throws JMSException {
-        activeMQConnectionFactory = new ActiveMQConnectionFactory(user,password,url);
+        activeMQConnectionFactory = new ActiveMQConnectionFactory(user, password, url);
         connection = activeMQConnectionFactory.createConnection();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         destination = session.createTopic(subject);
@@ -52,9 +52,9 @@ public class ConsumerTool implements ExceptionListener, MessageListener {
     //关闭连接
     public void close() throws JMSException {
         System.out.println("Consumer close connection!");
-        if(consumer != null) consumer.close();
-        if(session != null) session.close();
-        if(connection != null) connection.close();
+        if (consumer != null) consumer.close();
+        if (session != null) session.close();
+        if (connection != null) connection.close();
     }
 
     @Override
@@ -65,11 +65,11 @@ public class ConsumerTool implements ExceptionListener, MessageListener {
     @Override
     public void onMessage(Message message) {
         try {
-            if(message instanceof TextMessage){
+            if (message instanceof TextMessage) {
                 TextMessage textMessage = (TextMessage) message;
                 String msg = textMessage.getText();
                 System.out.println("Consumer -> received: " + msg);
-            }else {
+            } else {
                 System.out.println("Consumer -> received: " + message);
             }
         } catch (JMSException e) {

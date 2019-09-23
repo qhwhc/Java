@@ -1,4 +1,4 @@
-package com.aspire.ssm.util;
+package com.fast.jasypt;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -13,19 +13,20 @@ import java.util.Map;
 
 /**
  * RSA公钥/私钥 工具类
- *
+ * <p>
  * 注:此工具类摘录自某个网友，具体的我忘记了，这是之前去网上找的，当时忘记把链接记下来了，深感抱歉。
+ *
  * @author JustryDeng
  * @date 2019/7/12 13:19
  */
 @SuppressWarnings("unused")
 public class KeypairUtil {
 
-    private static final String KEY_ALGORITHM = "RSA";
+    private static final String KEY_ALGORITHM = "RSA" ;
 
-    private static final String PUBLIC_KEY = "RSAPublicKey";
+    private static final String PUBLIC_KEY = "RSAPublicKey" ;
 
-    private static final String PRIVATE_KEY = "RSAPrivateKey";
+    private static final String PRIVATE_KEY = "RSAPrivateKey" ;
 
     /**
      * 获取公钥
@@ -94,17 +95,17 @@ public class KeypairUtil {
      * <p>
      * RSA算法的应用。
      * 1. RSA的公钥和私钥是由KeyPairGenerator生成的，获取KeyPairGenerator的实例后还需要设置其密钥位数。
-     *    设置密钥位数越高，加密过程越安全，一般使用1024位。     *
-     *    KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-     *    keyPairGen.initialize(1024);
+     * 设置密钥位数越高，加密过程越安全，一般使用1024位。     *
+     * KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+     * keyPairGen.initialize(1024);
      * 2.公钥和私钥可以通过KeyPairGenerator执行generateKeyPair()后生成密钥对KeyPair，
-     *   通过KeyPair.getPublic()和KeyPair.getPrivate()来获取。
-     *   动态生成密钥对，这是当前最耗时的操作，一般要2s以上。
-     *   KeyPair keyPair = keyPairGen.generateKeyPair();
-     *   公钥
-     *   PublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-     *   私钥
-     *   PrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+     * 通过KeyPair.getPublic()和KeyPair.getPrivate()来获取。
+     * 动态生成密钥对，这是当前最耗时的操作，一般要2s以上。
+     * KeyPair keyPair = keyPairGen.generateKeyPair();
+     * 公钥
+     * PublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+     * 私钥
+     * PrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
      * <p>
      * byte[] publicKeyData = publicKey.getEncoded();
      * byte[] privateKeyData = publicKey.getEncoded();

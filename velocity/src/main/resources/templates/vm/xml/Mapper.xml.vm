@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${package}.dao.${className}Dao">
-    
+
     <resultMap type="${package}.dto.${className}DTO" id="${className}Result">
-#foreach ($column in $columns)
-        <result property="${column.attrname}"    column="${column.columnName}"    />
-#end
+        #foreach ($column in $columns)
+            <result property="${column.attrname}" column="${column.columnName}"/>
+        #end
     </resultMap>
 
-	<sql id="select${className}Vo">
-        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
+    <sql id="select${className}Vo">
+        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end
+        from ${tableName}
     </sql>
-	
-    <select id="select${className}List" parameterType="${package}.dto.${className}DTO" resultMap="${className}Result">
+
+#*    <select id="select${className}List" parameterType="${package}.dto.${className}DTO" resultMap="${className}Result">
         <include refid="select${className}Vo"/>
         <where>  
 #foreach($column in $columns)
+#if($column.attrname != "id")
 #if($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
-            <if test="$column.attrname != null"> and $column.columnName = #{$column.attrname}</if>
+    <if test="$column.attrname != null"> and $column.columnName = #{$column.attrname}</if>
 #else
-            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
+    <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
+#end
 #end
 #end
         </where>
@@ -49,9 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
 #if($column.attrname == "createDate" || $column.attrname == "createTime" || $column.attrname == "updateDate" || $column.attrname == "updateTime")
-            <if test="$column.attrname != null">$column.columnName,</if>
+            <if test="$column.attrname != null">#{$column.attrname},</if>
 #else
-            <if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
+            <if test="$column.attrname != null and $column.attrname != '' ">#{$column.attrname},</if>
 #end
 #end
 #end
@@ -83,6 +86,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <foreach item="${primaryKey.attrname}" collection="array" open="(" separator="," close=")">
             #{${primaryKey.attrname}}
         </foreach>
-    </delete>
-    
+    </delete>*#
+
 </mapper>

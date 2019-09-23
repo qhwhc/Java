@@ -8,11 +8,11 @@ import java.util.Date;
 
 public class DateUtils {
     public static final SimpleDateFormat SOLONGDATEFORMATE = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-    public static String YYYY = "yyyy";
-    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
-    public static String YYYY_MM = "yyyy-MM";
-    public static String YYYY_MM_DD = "yyyy-MM-dd";
-    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static String YYYY = "yyyy" ;
+    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss" ;
+    public static String YYYY_MM = "yyyy-MM" ;
+    public static String YYYY_MM_DD = "yyyy-MM-dd" ;
+    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss" ;
 
     public static Date getNowDate() {
         return new Date();
@@ -63,7 +63,7 @@ public class DateUtils {
             date = new Date();
         }
         String trxNo = SOLONGDATEFORMATE.format(date);
-        String randomStr = "";
+        String randomStr = "" ;
         for (int i = 0; i < 9; i++) {
             randomStr = randomStr + ((int) (Math.random() * 9.0d));
         }

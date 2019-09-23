@@ -1,4 +1,4 @@
-package com.fast.mysql.function.pojo;
+package com.fast.mysql.procedure.pojo;
 
 /**
  * 使用对象来封装参数
@@ -40,6 +40,6 @@ public class ProcedureModel {
 
     @Override
     public String toString() {
-        return "ProcedureModel{paramA=" + paramA + ", paramB=" + paramB + ", paramC='" + paramC + "'}";
+        return "ProcedureModel{paramA=" + paramA + ", paramB=" + paramB + ", paramC='" + paramC + "'}" ;
     }
 }

@@ -6,5 +6,5 @@ package com.fast.core.constant;
  * @Version 1.0
  */
 public class Constants {
-    public static String AUTO_REOMVE_PRE = "true";
+    public static String AUTO_REOMVE_PRE = "true" ;
 }

@@ -18,23 +18,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class GeneratorTest {
     @Autowired
     GenService genService;
+
     @Test
-    public void genTest(){
+    public void genTest() {
         genService.generatorCode("t_sys_role");
     }
 
     @Test
-    public void gen2File(){
-        genService.generatorCode2Dir("t_sys_user","C:\\Users\\ASUS\\Desktop\\GenCode\\test\\");
+    public void gen2File() {
+        genService.generatorCode2Dir("t_sys_user", "C:\\Users\\ASUS\\Desktop\\GenCode\\test\\");
     }
 
     @Test
-    public void gen2Zip(){
-        genService.generatorCode2Zip("t_report_analyze_header","C:\\Users\\ASUS\\Desktop\\GenCode\\test\\t_report_analyze_header.zip");
+    public void gen2Zip() {
+        genService.generatorCode2Zip("t_report_analyze_header", "C:\\Users\\ASUS\\Desktop\\GenCode\\test\\t_report_analyze_header .zip");
     }
 
     @Test
-    public void testTableDao(){
+    public void testTableDao() {
         genService.selectTableList(null).forEach(System.out::println);
     }
 }

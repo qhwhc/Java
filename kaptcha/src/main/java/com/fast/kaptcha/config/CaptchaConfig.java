@@ -21,7 +21,7 @@ public class CaptchaConfig {
         properties.setProperty("kaptcha.textproducer.font.size", "28");
         properties.setProperty("kaptcha.session.key", "kaptchaCode");
         properties.setProperty("kaptcha.textproducer.char.spac", "35");
-        properties.setProperty("kaptcha.textproducer.char.length","5");
+        properties.setProperty("kaptcha.textproducer.char.length", "5");
         properties.setProperty("kaptcha.textproducer.font.names", "Arial,Courier");
         properties.setProperty("kaptcha.noise.color", "white");
         defaultKaptcha.setConfig(new Config(properties));

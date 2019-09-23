@@ -16,14 +16,14 @@ public class SpringbootScheduleTastTest {
 
 
     /**
+     * @return void
      * @Author cyb
      * @Description 定时任务开启测试
-     * @Date 2019/7/24 14:49 
+     * @Date 2019/7/24 14:49
      * @Param []
-     * @return void
      **/
     @Test
-    public void scheduleCron(){
+    public void scheduleCron() {
         System.out.println("启动成功！");
     }
 }

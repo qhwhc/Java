@@ -9,6 +9,7 @@ public class GenConfig {
     public static String autoRemovePre;
     public static String packageName;
     public static String tablePrefix;
+
     public static String getAuthor() {
         return author;
     }
@@ -46,6 +47,6 @@ public class GenConfig {
     }
 
     public String toString() {
-        return "GenConfig [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+        return "GenConfig [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]" ;
     }
 }

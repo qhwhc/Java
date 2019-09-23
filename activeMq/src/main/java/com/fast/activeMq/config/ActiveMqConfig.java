@@ -93,7 +93,7 @@ public class ActiveMqConfig {
         factory.setMaxConnections(this.maxConnections);
         factory.setMaximumActiveSessionPerConnection(this.maxActive);
         factory.setIdleTimeout(this.idleTimeout);
-        factory.setExpiryTimeout((long)this.expiryimeout);
+        factory.setExpiryTimeout((long) this.expiryimeout);
         LOG.debug("初始化ActiveMQ JmsTemplate !");
         JmsTemplate jmsTemplate = new JmsTemplate(factory);
         jmsTemplate.setExplicitQosEnabled(true);
@@ -119,7 +119,7 @@ public class ActiveMqConfig {
 
             StringBuffer stringBuffer = new StringBuffer("");
 
-            for(int i = 0; i < mac.length; ++i) {
+            for (int i = 0; i < mac.length; ++i) {
                 if (i != 0) {
                     stringBuffer.append("-");
                 }
@@ -160,7 +160,7 @@ public class ActiveMqConfig {
                 return null;
             }
 
-            for(int i = 0; i < li.size(); ++i) {
+            for (int i = 0; i < li.size(); ++i) {
                 NetworkInterface ni = li.get(i);
                 if (ni != null) {
                     String niName = "[" + (i + 1) + "]---> 网络接口: " + ni.getName();

@@ -22,18 +22,19 @@ import java.util.zip.ZipOutputStream;
 @RunWith(SpringRunner.class)
 public class FileUtilTest {
     private FileUtil fileUtil = new FileUtil();
+
     @Test
-    public void file2Zip(){
+    public void file2Zip() {
         Map<String, String> files = new HashMap<>();
         FileOutputStream outputStream = null;
         try {
-            files.put("文件1.zip","ftp://192.168.1.103:1021//home//ftpuser//uploadFile");
-            files.put("文件2.zip","C:\\Users\\ASUS\\Desktop\\GenCode\\test\\2.zip");
+            files.put("文件1.zip", "ftp://192.168.1.103:1021//home//ftpuser//uploadFile");
+            files.put("文件2.zip", "C:\\Users\\ASUS\\Desktop\\GenCode\\test\\2.zip");
             outputStream = new FileOutputStream("C:\\Users\\ASUS\\Desktop\\GenCode\\test\\3.zip");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        fileUtil.files2Zip(files,zip);
+        fileUtil.files2Zip(files, zip);
     }
 }

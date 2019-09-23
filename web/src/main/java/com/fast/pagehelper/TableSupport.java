@@ -1,20 +1,20 @@
-package com.fast.framework.pageHelper.util;
+package com.fast.pagehelper;
 
-import com.douples.core.constant.Constants;
-import com.douples.core.utils.ServletUtils;
+
+import com.fast.core.utils.web.ServletUtils;
 import com.fast.framework.pageHelper.pojo.PageDomain;
 
 public class TableSupport {
-   public static PageDomain getPageDomain() {
-      PageDomain pageDomain = new PageDomain();
-      pageDomain.setPageNum(ServletRequestUtils);
-      pageDomain.setPageSize(ServletUtils.getParameterToInt(Constants.PAGE_SIZE));
-      pageDomain.setOrderByColumn(ServletUtils.getParameter(Constants.ORDER_BY_COLUMN));
-      pageDomain.setIsAsc(ServletUtils.getParameter(Constants.IS_ASC));
-      return pageDomain;
-   }
+    public static PageDomain getPageDomain() {
+        PageDomain pageDomain = new PageDomain();
+        pageDomain.setPageNum(ServletUtils.getParameterToInt("pageNum"));
+        pageDomain.setPageSize(ServletUtils.getParameterToInt("pageSize"));
+        pageDomain.setOrderByColumn(ServletUtils.getParameter("orderByColumn"));
+        pageDomain.setIsAsc(ServletUtils.getParameter("isAsc"));
+        return pageDomain;
+    }
 
-   public static PageDomain buildPageRequest() {
-      return getPageDomain();
-   }
+    public static PageDomain buildPageRequest() {
+        return getPageDomain();
+    }
 }

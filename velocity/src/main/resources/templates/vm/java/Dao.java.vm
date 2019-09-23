@@ -1,22 +1,24 @@
 package ${package}.dao;
 
 import ${package}.dto.${className}DTO;
-import java.util.List;	
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * ${tableComment} 数据层
- * 
+ *
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${className}Dao{
-	/**
+public interface ${className}Dao extends BaseMapper<${className}DTO> {
+#*	/**
      * 查询${tableComment}信息
      * 
      * @param id ${tableComment}ID
      * @return ${tableComment}信息
      */
-	public ${className}DTO select${className}ById(${primaryKey.attrType} id);
+	${className}DTO select${className}ById(${primaryKey.attrType} id);
 	
 	/**
      * 查询${tableComment}列表
@@ -24,7 +26,7 @@ public interface ${className}Dao{
      * @param ${classname} ${tableComment}信息
      * @return ${tableComment}集合
      */
-	public List<${className}DTO> select${className}List(${className}DTO ${classname});
+	List<${className}DTO> select${className}List(${className}DTO ${classname});
 	
 	/**
      * 新增${tableComment}
@@ -32,7 +34,7 @@ public interface ${className}Dao{
      * @param ${classname} ${tableComment}信息
      * @return 结果
      */
-	public int insert${className}(${className}DTO ${classname});
+	int insert${className}(${className}DTO ${classname});
 	
 	/**
      * 修改${tableComment}
@@ -40,7 +42,7 @@ public interface ${className}Dao{
      * @param ${classname} ${tableComment}信息
      * @return 结果
      */
-	public int update${className}(${className}DTO ${classname});
+	int update${className}(${className}DTO ${classname});
 	
 	/**
      * 删除${tableComment}
@@ -48,7 +50,7 @@ public interface ${className}Dao{
      * @param id ${tableComment}ID
      * @return 结果
      */
-	public int delete${className}ById(${primaryKey.attrType} id);
+	int delete${className}ById(${primaryKey.attrType} id);
 	
 	/**
      * 批量删除${tableComment}
@@ -56,6 +58,5 @@ public interface ${className}Dao{
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int delete${className}ByIds(String[] ids);
-	
+	int delete${className}ByIds(String[] ids);*#
 }

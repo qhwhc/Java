@@ -64,7 +64,7 @@ mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*Mapper.xml
   type-aliases-package: com.fast.velocity
 # 代码生成
-gen: 
+gen:
   # 作者
   author: cyb
   # 默认生成包路径 module 需改成自己的模块名称

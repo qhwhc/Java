@@ -21,7 +21,7 @@ import java.util.List;
 public class JsqlparserTest {
     @Test
     public void sqlParseTable() throws JSQLParserException {
-        String sql = "select * from t_sys_user";
+        String sql = "select * from t_sys_user" ;
         Statement statement = CCJSqlParserUtil.parse(sql);
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
         List<String> tableList = tablesNamesFinder.getTableList(statement);

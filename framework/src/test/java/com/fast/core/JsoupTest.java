@@ -18,10 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class JsoupTest {
     private Logger logger = LoggerFactory.getLogger(JsoupTest.class);
+
     @Test
-    public void parse(){
+    public void parse() {
         String html = "<html><head><title>First parse</title></head>"
-                + "<body><p>Parsed HTML into a doc.</p></body></html>";
+                + "<body><p>Parsed HTML into a doc.</p></body></html>" ;
         Document doc = Jsoup.parse(html);
         logger.info(doc.toString());
     }

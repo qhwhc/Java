@@ -20,7 +20,7 @@ public class MpTest {
     DbTableDao dbTableDao;
 
     @Test
-    public void selectMp(){
+    public void selectMp() {
         dbTableDao.selectList(null).forEach(System.out::println);
     }
 

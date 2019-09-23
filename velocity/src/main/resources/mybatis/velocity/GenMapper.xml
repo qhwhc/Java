@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fast.velocity.dao.GenDao">
 
-	<resultMap type="TableInfoDTO" id="TableInfoResult">
-		<id     property="tableName"      column="TABLE_NAME"      />
-		<result property="tableComment"   column="TABLE_COMMENT"   />
-		<result property="createTime"     column="CREATE_TIME"     />
-		<result property="updateTime"     column="UPDATE_TIME"     />
-	</resultMap>
-	
-	<resultMap type="ColumnInfoDTO" id="ColumnInfoResult">
-		<id     property="columnName"     column="COLUMN_NAME"      />
-		<result property="dataType"       column="DATA_TYPE"        />
-		<result property="columnComment"  column="COLUMN_COMMENT"   />
-	</resultMap>
-	
-	<sql id="selectGenVo">
+    <resultMap type="TableInfoDTO" id="TableInfoResult">
+        <id property="tableName" column="TABLE_NAME"/>
+        <result property="tableComment" column="TABLE_COMMENT"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+    </resultMap>
+
+    <resultMap type="ColumnInfoDTO" id="ColumnInfoResult">
+        <id property="columnName" column="COLUMN_NAME"/>
+        <result property="dataType" column="DATA_TYPE"/>
+        <result property="columnComment" column="COLUMN_COMMENT"/>
+    </resultMap>
+
+    <sql id="selectGenVo">
         SELECT TABLE_NAME, TABLE_COMMENT, CREATE_TIME, UPDATE_TIME FROM INFORMATION_SCHEMA.TABLES
     </sql>
 
-	<select id="selectTableList" parameterType="TableInfoDTO" resultMap="TableInfoResult">
-		<include refid="selectGenVo"/>
-		WHERE TABLE_COMMENT <![CDATA[ <> ]]> '' AND TABLE_SCHEMA = (SELECT DATABASE())
-		<if test="tableName != null and tableName != ''">
-			AND TABLE_NAME LIKE CONCAT('%', #{tableName}, '%')
-		</if>
-		<if test="tableComment != null and tableComment != ''">
-			AND TABLE_COMMENT LIKE CONCAT('%', #{tableComment}, '%')
-		</if>
-		<if test="params != null and params.beginTime != ''"><!-- 开始时间检索 -->
-			AND DATE_FORMAT(CREATE_TIME,'%y%m%d') &gt;= DATE_FORMAT(#{params.beginTime},'%y%m%d')
-		</if>
-		<if test="params != null and params.endTime != ''"><!-- 结束时间检索 -->
-			AND DATE_FORMAT(CREATE_TIME,'%y%m%d') &lt;= DATE_FORMAT(#{params.endTime},'%y%m%d')
-		</if>
-	</select>
-	
+    <select id="selectTableList" parameterType="TableInfoDTO" resultMap="TableInfoResult">
+        <include refid="selectGenVo"/>
+        WHERE TABLE_COMMENT <![CDATA[ <> ]]> '' AND TABLE_SCHEMA = (SELECT DATABASE())
+        <if test="tableName != null and tableName != ''">
+            AND TABLE_NAME LIKE CONCAT('%', #{tableName}, '%')
+        </if>
+        <if test="tableComment != null and tableComment != ''">
+            AND TABLE_COMMENT LIKE CONCAT('%', #{tableComment}, '%')
+        </if>
+        <if test="params != null and params.beginTime != ''"><!-- 开始时间检索 -->
+            AND DATE_FORMAT(CREATE_TIME,'%y%m%d') &gt;= DATE_FORMAT(#{params.beginTime},'%y%m%d')
+        </if>
+        <if test="params != null and params.endTime != ''"><!-- 结束时间检索 -->
+            AND DATE_FORMAT(CREATE_TIME,'%y%m%d') &lt;= DATE_FORMAT(#{params.endTime},'%y%m%d')
+        </if>
+    </select>
 
-	<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
-		<include refid="selectGenVo"/>
-		WHERE TABLE_COMMENT <![CDATA[ <> ]]> '' AND TABLE_SCHEMA = (SELECT DATABASE())
-		AND TABLE_NAME = #{tableName}
-	</select>
-	
-	<select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
-		SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS
+
+    <select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
+        <include refid="selectGenVo"/>
+        WHERE TABLE_COMMENT <![CDATA[ <> ]]> '' AND TABLE_SCHEMA = (SELECT DATABASE())
+        AND TABLE_NAME = #{tableName}
+    </select>
+
+    <select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
+        SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = #{tableName} AND TABLE_SCHEMA = (SELECT DATABASE()) ORDER BY ORDINAL_POSITION
-	</select>
+    </select>
 
 </mapper> 

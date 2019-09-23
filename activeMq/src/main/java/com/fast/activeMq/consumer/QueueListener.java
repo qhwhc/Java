@@ -13,8 +13,9 @@ public class QueueListener {
     {
         System.out.println("启动监听器");
     }
-    @JmsListener(destination="TestSpringMq",containerFactory = "queueListenerFactory")
-    public void mqReceiveTest(String msg){
+
+    @JmsListener(destination = "TestSpringMq", containerFactory = "queueListenerFactory")
+    public void mqReceiveTest(String msg) {
         System.out.println("receive message:" + msg);
     }
 }

@@ -1,7 +1,6 @@
 package com.fast.velocity.service.impl;
 
 
-
 import com.fast.core.exception.base.BaseException;
 import com.fast.core.utils.StringUtils;
 import com.fast.framework.config.GenConfig;
@@ -30,6 +29,7 @@ public class GenServiceImpl implements GenService {
     public List<TableInfoDTO> selectTableList(TableInfoDTO tableInfo) {
         return this.genMapper.selectTableList(tableInfo);
     }
+
     @Override
     public byte[] generatorCode(String tableName) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -38,6 +38,7 @@ public class GenServiceImpl implements GenService {
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
+
     @Override
     public byte[] generatorCode(String[] tableNames) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -50,7 +51,7 @@ public class GenServiceImpl implements GenService {
     }
 
     public void generatorCode(TableInfoDTO table, List<ColumnInfoDTO> columns, ZipOutputStream zip) {
-        table = setTableInfo(table,columns);
+        table = setTableInfo(table, columns);
         VelocityInitializer.initVelocity();
         String moduleName = GenUtils.getModuleName(GenConfig.getPackageName());
         VelocityContext context = GenUtils.getVelocityContext(table);
@@ -69,23 +70,23 @@ public class GenServiceImpl implements GenService {
     }
 
     @Override
-    public void generatorCode2Dir(String tableName,String dir){
-        generatorCode2Dir(this.genMapper.selectTableByName(tableName), this.genMapper.selectTableColumnsByName(tableName),dir);
+    public void generatorCode2Dir(String tableName, String dir) {
+        generatorCode2Dir(this.genMapper.selectTableByName(tableName), this.genMapper.selectTableColumnsByName(tableName), dir);
     }
 
     /**
+     * @return void
      * @Author cyb
      * @Description 将生产的模板文件输出到指定文件
-     * @Date 2019/8/12 16:48 
+     * @Date 2019/8/12 16:48
      * @Param [table, columns, zip, filePath]
-     * @return void
      **/
 
-    public void generatorCode2Dir(TableInfoDTO table, List<ColumnInfoDTO> columns,String dir) {
-        if(!dir.endsWith("/") && !dir.endsWith("\\\\")){
-            dir += "/";
+    public void generatorCode2Dir(TableInfoDTO table, List<ColumnInfoDTO> columns, String dir) {
+        if (!dir.endsWith("/") && !dir.endsWith("\\\\")) {
+            dir += "/" ;
         }
-        table = setTableInfo(table,columns);
+        table = setTableInfo(table, columns);
         VelocityInitializer.initVelocity();
         String moduleName = GenUtils.getModuleName(GenConfig.getPackageName());
         VelocityContext context = GenUtils.getVelocityContext(table);
@@ -97,7 +98,7 @@ public class GenServiceImpl implements GenService {
                 //创建目录
                 file.getParentFile().mkdirs();
                 //创建文件
-                if(!file.exists()) file.createNewFile();
+                if (!file.exists()) file.createNewFile();
                 FileOutputStream outputStream = new FileOutputStream(file);
                 IOUtils.write(sw.toString(), outputStream, "UTF-8");
                 IOUtils.closeQuietly(sw);
@@ -109,20 +110,20 @@ public class GenServiceImpl implements GenService {
     }
 
     /**
+     * @return void
      * @Author cyb
      * @Description 生成压缩文件
      * @Date 2019/8/13 16:52
      * @Param [tableName, filePath]
-     * @return void
      **/
-    public void generatorCode2Zip(String tableName,String filePath){
+    public void generatorCode2Zip(String tableName, String filePath) {
         File file = new File(filePath);
         //创建目录
         file.getParentFile().mkdirs();
         FileOutputStream outputStream;
         try {
             //创建文件
-            if(!file.exists())  file.createNewFile();
+            if (!file.exists()) file.createNewFile();
             outputStream = new FileOutputStream(file);
         } catch (IOException e) {
             throw new BaseException("找不到对应文件：" + filePath, e.getMessage());
@@ -131,14 +132,15 @@ public class GenServiceImpl implements GenService {
         generatorCode(this.genMapper.selectTableByName(tableName), this.genMapper.selectTableColumnsByName(tableName), zip);
         IOUtils.closeQuietly(zip);
     }
+
     /**
+     * @return com.fast.velocity.dto.TableInfoDTO
      * @Author cyb
      * @Description 设置表格基本信息
-     * @Date 2019/8/12 16:48 
+     * @Date 2019/8/12 16:48
      * @Param [table, columns]
-     * @return com.fast.velocity.dto.TableInfoDTO
      **/
-    public TableInfoDTO setTableInfo(TableInfoDTO table,List<ColumnInfoDTO> columns){
+    public TableInfoDTO setTableInfo(TableInfoDTO table, List<ColumnInfoDTO> columns) {
         //转换为驼峰命名
         String className = GenUtils.tableToJava(table.getTableName());
         table.setClassName(className);

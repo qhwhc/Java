@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class ExcelImportTest {
     @Test
-    public void importTest(){
+    public void importTest() {
 
     }
 }

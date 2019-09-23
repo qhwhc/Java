@@ -17,8 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class I18n {
     private static Logger logger = LoggerFactory.getLogger(I18n.class);
+
     @Test
-    public void i18nCode(){
+    public void i18nCode() {
         logger.info(MessageUtils.message("no.view.permission"));
     }
 

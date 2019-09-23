@@ -30,7 +30,7 @@ public class FtpUtil {
     /**
      * FTP地址
      **/
-    private static final String FTP_ADDRESS = "192.168.1.103";
+    private static final String FTP_ADDRESS = "192.168.1.103" ;
 
     /**
      * FTP端口
@@ -40,37 +40,37 @@ public class FtpUtil {
     /**
      * FTP用户名
      **/
-    private static final String FTP_USERNAME = "ftpuser";
+    private static final String FTP_USERNAME = "ftpuser" ;
 
     /**
      * FTP密码
      **/
-    private static final String FTP_PASSWORD = "ftpuser";
+    private static final String FTP_PASSWORD = "ftpuser" ;
 
     /**
      * FTP基础目录
      **/
-    private static final String BASE_PATH = "/";
+    private static final String BASE_PATH = "/" ;
 
     /**
      * 本地字符编码
      **/
-    private static String localCharset = "GBK";
+    private static String localCharset = "GBK" ;
 
     /**
      * FTP协议里面，规定文件名编码为iso-8859-1
      **/
-    private static String serverCharset = "ISO-8859-1";
+    private static String serverCharset = "ISO-8859-1" ;
 
     /**
      * UTF-8字符编码
      **/
-    private static final String CHARSET_UTF8 = "UTF-8";
+    private static final String CHARSET_UTF8 = "UTF-8" ;
 
     /**
      * OPTS UTF8字符串常量
      **/
-    private static final String OPTS_UTF8 = "OPTS UTF8";
+    private static final String OPTS_UTF8 = "OPTS UTF8" ;
 
     /**
      * 设置缓冲区大小4M
@@ -581,7 +581,7 @@ public class FtpUtil {
     private void createDirectorys(String dirPath) {
         try {
             if (!dirPath.endsWith("/")) {
-                dirPath += "/";
+                dirPath += "/" ;
             }
             String directory = dirPath.substring(0, dirPath.lastIndexOf("/") + 1);
             ftpClient.makeDirectory("/");

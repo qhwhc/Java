@@ -14,13 +14,15 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ConsumerTest{
+public class ConsumerTest {
     @Autowired
     ConsumerTool consumer;
+
     @Test
     public void consumerTest() throws Exception {
         consumer.consumeMessage();
-        while (consumer.isconnection){}
+        while (consumer.isconnection) {
+        }
     }
 
 }

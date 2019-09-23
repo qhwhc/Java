@@ -17,6 +17,7 @@ import java.util.List;
 public class TableServiceImpl implements TableService {
     @Autowired
     private TableDao tableDao;
+
     @Override
     public List<Table> selectTables() {
         return tableDao.selectTables();

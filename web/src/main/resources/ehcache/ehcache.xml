@@ -13,8 +13,8 @@
             timeToLiveSeconds="3600"
             overflowToDisk="false">
     </defaultCache>
-    
-     <!-- 券别配置 缓存 -->
+
+    <!-- 券别配置 缓存 -->
     <cache name="confCurrCouponTypeCache"
            maxEntriesLocalHeap="2000"
            eternal="false"
@@ -23,7 +23,7 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-    
+
     <!-- 币值配置 缓存 -->
     <cache name="confCurrDeTypeCache"
            maxEntriesLocalHeap="2000"
@@ -33,7 +33,7 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-    
+
     <!-- 货币版别、版本缓存 -->
     <cache name="confCurrVerCache"
            maxEntriesLocalHeap="2000"
@@ -43,7 +43,7 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-    
+
     <!-- 包装类型缓存 -->
     <cache name="confPackTypeCache"
            maxEntriesLocalHeap="2000"

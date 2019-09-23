@@ -17,8 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class LogbackTest {
     private Logger logger = LoggerFactory.getLogger(LogbackTest.class);
+
     @Test
-    public void logbackLevel(){
+    public void logbackLevel() {
         logger.trace("trace info");
         logger.debug("debug info");
         logger.info("info info");

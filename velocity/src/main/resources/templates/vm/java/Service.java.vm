@@ -5,49 +5,49 @@ import java.util.List;
 
 /**
  * ${tableComment} 服务层
- * 
+ *
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${className}Service{
-	/**
+public interface ${className}Service {
+    /**
      * 查询${tableComment}信息
-     * 
+     *
      * @param id ${tableComment}ID
      * @return ${tableComment}信息
      */
-	public ${className}DTO select${className}ById(${primaryKey.attrType} id);
-	
-	/**
+    public ${className}DTO select${className}ById(${primaryKey.attrType} id);
+
+    /**
      * 查询${tableComment}列表
-     * 
+     *
      * @param ${classname} ${tableComment}信息
      * @return ${tableComment}集合
      */
-	public List<${className}DTO> select${className}List(${className}DTO ${classname});
-	
-	/**
+    public List<${className}DTO> select${className}List(${className}DTO ${classname});
+
+    /**
      * 新增${tableComment}
-     * 
+     *
      * @param ${classname} ${tableComment}信息
      * @return 结果
      */
-	public int insert${className}(${className}DTO ${classname});
-	
-	/**
+    public int insert${className}(${className}DTO ${classname});
+
+    /**
      * 修改${tableComment}
-     * 
+     *
      * @param ${classname} ${tableComment}信息
      * @return 结果
      */
-	public int update${className}(${className}DTO ${classname});
-		
-	/**
+    public int update${className}(${className}DTO ${classname});
+
+    /**
      * 删除${tableComment}信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int delete${className}ByIds(String ids);
-	
+    public int delete${className}ByIds(String ids);
+
 }

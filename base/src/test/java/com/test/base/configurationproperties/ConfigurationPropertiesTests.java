@@ -1,6 +1,8 @@
-package com.aspire.configurationproperties;
+package com.test.base.configurationproperties;
 
-import com.aspire.configurationproperties.config.DemoConfig;
+
+import com.fast.BaseApplication;
+import com.fast.configurationproperties.config.DemoConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 public class ConfigurationPropertiesTests {
 
     @Autowired

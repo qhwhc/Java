@@ -1,7 +1,8 @@
-package com;
+package com.test.base.springcache;
 
-import com.demo.KeyDemo;
-import com.model.User;
+import com.fast.BaseApplication;
+import com.fast.springcache.demo.KeyDemo;
+import com.fast.springcache.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 public class KeyTests {
 
 
@@ -17,52 +18,52 @@ public class KeyTests {
     KeyDemo keyDemo;
 
     @Test
-    public  void testOne() {
+    public void testOne() {
         keyDemo.methodOne();
     }
 
     @Test
-    public  void testTwo() {
+    public void testTwo() {
         keyDemo.methodTwo("paramA");
     }
 
     @Test
-    public  void testThree() {
+    public void testThree() {
         User user = User.builder().name("张三").age(18).motto("蚂蚁牙黑！").build();
         keyDemo.methodThree(user);
     }
 
 
     @Test
-    public  void testFour() {
+    public void testFour() {
         User user = User.builder().name("李四").age(18).motto("蚂蚁牙黑！").build();
         keyDemo.methodFour("paramA", 1, user);
     }
 
     @Test
-    public  void testFive() {
+    public void testFive() {
         keyDemo.methodFive("paramA");
     }
 
     @Test
-    public  void testSix() {
+    public void testSix() {
         keyDemo.methodSix();
     }
 
     @Test
-    public  void testSeven() {
+    public void testSeven() {
         keyDemo.methodSeven("ma~yi~ya~hei!");
     }
 
     @Test
-    public  void testEight() {
+    public void testEight() {
         User user = User.builder().name("JustryDeng").age(18).motto("蚂蚁牙黑！").build();
         keyDemo.methodEight("123木头人", user);
     }
 
 
     @Test
-    public  void testNine() {
+    public void testNine() {
         keyDemo.methodNine();
     }
 }

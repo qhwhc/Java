@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @Date: 2019/8/7 16:40
  * @Version 1.0
  */
-@SpringBootApplication(exclude ={DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class KaptchaApplication {
     public static void main(String[] args) {
         SpringApplication.run(KaptchaApplication.class);

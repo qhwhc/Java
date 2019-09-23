@@ -34,7 +34,7 @@ public class CalendarTest {
      * CronCalendar。指定Cron表达式。精度取决于Cron表达式，也就是最大精度可以到秒。
      */
     @Test
-    public void cTest(){
+    public void cTest() {
         //创建scheduler
         Scheduler scheduler = null;
         try {

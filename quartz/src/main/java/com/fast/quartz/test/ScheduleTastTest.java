@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 public class ScheduleTastTest {
     @Scheduled(fixedRate = 2000)
-    public void testScheduled1(){
+    public void testScheduled1() {
         System.out.println(DateUtils.getNowDate());
     }
 }

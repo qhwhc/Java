@@ -1,17 +1,22 @@
-package com.fast.framework.pageHelper.util;
-
-import java.util.Set;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.math.BigInteger;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
+package com.fast.core.utils;
 
 import com.fast.core.support.CharsetKit;
-import com.fast.core.utils.StringUtils;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.text.NumberFormat;
+import java.util.Set;
+
+/**
+ * @description: 数据转换工具
+ * @author: cyb
+ * @since : 2019/9/21
+ */
 public class Convert {
-    public static String toStr(final Object value, final String defaultValue) {
+
+    public static String toStr(Object value, String defaultValue) {
         if (null == value) {
             return defaultValue;
         }
@@ -21,26 +26,26 @@ public class Convert {
         return value.toString();
     }
 
-    public static String toStr(final Object value) {
+    public static String toStr(Object value) {
         return toStr(value, null);
     }
 
-    public static Character toChar(final Object value, final Character defaultValue) {
+    public static Character toChar(Object value, Character defaultValue) {
         if (null == value) {
             return defaultValue;
         }
         if (value instanceof Character) {
             return (Character) value;
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         return StringUtils.isEmpty(valueStr) ? defaultValue : valueStr.charAt(0);
     }
 
-    public static Character toChar(final Object value) {
+    public static Character toChar(Object value) {
         return toChar(value, null);
     }
 
-    public static Byte toByte(final Object value, final Byte defaultValue) {
+    public static Byte toByte(Object value, Byte defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -50,7 +55,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).byteValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -61,11 +66,11 @@ public class Convert {
         }
     }
 
-    public static Byte toByte(final Object value) {
+    public static Byte toByte(Object value) {
         return toByte(value, null);
     }
 
-    public static Short toShort(final Object value, final Short defaultValue) {
+    public static Short toShort(Object value, Short defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -75,7 +80,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).shortValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -86,18 +91,18 @@ public class Convert {
         }
     }
 
-    public static Short toShort(final Object value) {
+    public static Short toShort(Object value) {
         return toShort(value, null);
     }
 
-    public static Number toNumber(final Object value, final Number defaultValue) {
+    public static Number toNumber(Object value, Number defaultValue) {
         if (value == null) {
             return defaultValue;
         }
         if (value instanceof Number) {
             return (Number) value;
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -108,11 +113,11 @@ public class Convert {
         }
     }
 
-    public static Number toNumber(final Object value) {
+    public static Number toNumber(Object value) {
         return toNumber(value, null);
     }
 
-    public static Integer toInt(final Object value, final Integer defaultValue) {
+    public static Integer toInt(Object value, Integer defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -122,7 +127,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).intValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -133,53 +138,53 @@ public class Convert {
         }
     }
 
-    public static Integer toInt(final Object value) {
+    public static Integer toInt(Object value) {
         return toInt(value, null);
     }
 
-    public static Integer[] toIntArray(final String str) {
+    public static Integer[] toIntArray(String str) {
         return toIntArray(",", str);
     }
 
-    public static Long[] toLongArray(final String str) {
+    public static Long[] toLongArray(String str) {
         return toLongArray(",", str);
     }
 
-    public static Integer[] toIntArray(final String split, final String str) {
+    public static Integer[] toIntArray(String split, String str) {
         if (StringUtils.isEmpty(str)) {
             return new Integer[0];
         }
-        final String[] arr = str.split(split);
-        final Integer[] ints = new Integer[arr.length];
+        String[] arr = str.split(split);
+        Integer[] ints = new Integer[arr.length];
         for (int i = 0; i < arr.length; ++i) {
-            final Integer v = toInt(arr[i], 0);
+            Integer v = toInt(arr[i], 0);
             ints[i] = v;
         }
         return ints;
     }
 
-    public static Long[] toLongArray(final String split, final String str) {
+    public static Long[] toLongArray(String split, String str) {
         if (StringUtils.isEmpty(str)) {
             return new Long[0];
         }
-        final String[] arr = str.split(split);
-        final Long[] longs = new Long[arr.length];
+        String[] arr = str.split(split);
+        Long[] longs = new Long[arr.length];
         for (int i = 0; i < arr.length; ++i) {
-            final Long v = toLong(arr[i], null);
+            Long v = toLong(arr[i], null);
             longs[i] = v;
         }
         return longs;
     }
 
-    public static String[] toStrArray(final String str) {
+    public static String[] toStrArray(String str) {
         return toStrArray(",", str);
     }
 
-    public static String[] toStrArray(final String split, final String str) {
+    public static String[] toStrArray(String split, String str) {
         return str.split(split);
     }
 
-    public static Long toLong(final Object value, final Long defaultValue) {
+    public static Long toLong(Object value, Long defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -189,7 +194,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).longValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -200,11 +205,11 @@ public class Convert {
         }
     }
 
-    public static Long toLong(final Object value) {
+    public static Long toLong(Object value) {
         return toLong(value, null);
     }
 
-    public static Double toDouble(final Object value, final Double defaultValue) {
+    public static Double toDouble(Object value, Double defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -214,7 +219,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).doubleValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -225,11 +230,11 @@ public class Convert {
         }
     }
 
-    public static Double toDouble(final Object value) {
+    public static Double toDouble(Object value) {
         return toDouble(value, null);
     }
 
-    public static Float toFloat(final Object value, final Float defaultValue) {
+    public static Float toFloat(Object value, Float defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -239,7 +244,7 @@ public class Convert {
         if (value instanceof Number) {
             return ((Number) value).floatValue();
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -250,11 +255,11 @@ public class Convert {
         }
     }
 
-    public static Float toFloat(final Object value) {
+    public static Float toFloat(Object value) {
         return toFloat(value, null);
     }
 
-    public static Boolean toBool(final Object value, final Boolean defaultValue) {
+    public static Boolean toBool(Object value, Boolean defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -265,7 +270,7 @@ public class Convert {
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
-        final String lowerCase;
+        String lowerCase;
         valueStr = (lowerCase = valueStr.trim().toLowerCase());
         switch (lowerCase) {
             case "true":
@@ -287,19 +292,19 @@ public class Convert {
         }
     }
 
-    public static Boolean toBool(final Object value) {
+    public static Boolean toBool(Object value) {
         return toBool(value, null);
     }
 
-    public static <E extends Enum<E>> E toEnum(final Class<E> clazz, final Object value, final E defaultValue) {
+    public static <E extends Enum<E>> E toEnum(Class<E> clazz, Object value, E defaultValue) {
         if (value == null) {
             return defaultValue;
         }
         if (clazz.isAssignableFrom(value.getClass())) {
-            final E myE = (E) value;
+            E myE = (E) value;
             return myE;
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -310,11 +315,11 @@ public class Convert {
         }
     }
 
-    public static <E extends Enum<E>> E toEnum(final Class<E> clazz, final Object value) {
+    public static <E extends Enum<E>> E toEnum(Class<E> clazz, Object value) {
         return toEnum(clazz, value, (E) null);
     }
 
-    public static BigInteger toBigInteger(final Object value, final BigInteger defaultValue) {
+    public static BigInteger toBigInteger(Object value, BigInteger defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -324,7 +329,7 @@ public class Convert {
         if (value instanceof Long) {
             return BigInteger.valueOf((long) value);
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -335,11 +340,11 @@ public class Convert {
         }
     }
 
-    public static BigInteger toBigInteger(final Object value) {
+    public static BigInteger toBigInteger(Object value) {
         return toBigInteger(value, null);
     }
 
-    public static BigDecimal toBigDecimal(final Object value, final BigDecimal defaultValue) {
+    public static BigDecimal toBigDecimal(Object value, BigDecimal defaultValue) {
         if (value == null) {
             return defaultValue;
         }
@@ -355,7 +360,7 @@ public class Convert {
         if (value instanceof Integer) {
             return new BigDecimal((int) value);
         }
-        final String valueStr = toStr(value, null);
+        String valueStr = toStr(value, null);
         if (StringUtils.isEmpty(valueStr)) {
             return defaultValue;
         }
@@ -366,19 +371,19 @@ public class Convert {
         }
     }
 
-    public static BigDecimal toBigDecimal(final Object value) {
+    public static BigDecimal toBigDecimal(Object value) {
         return toBigDecimal(value, null);
     }
 
-    public static String utf8Str(final Object obj) {
+    public static String utf8Str(Object obj) {
         return str(obj, CharsetKit.CHARSET_UTF_8);
     }
 
-    public static String str(final Object obj, final String charsetName) {
+    public static String str(Object obj, String charsetName) {
         return str(obj, Charset.forName(charsetName));
     }
 
-    public static String str(final Object obj, final Charset charset) {
+    public static String str(Object obj, Charset charset) {
         if (null == obj) {
             return null;
         }
@@ -394,11 +399,11 @@ public class Convert {
         return obj.toString();
     }
 
-    public static String str(final byte[] bytes, final String charset) {
+    public static String str(byte[] bytes, String charset) {
         return str(bytes, StringUtils.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
     }
 
-    public static String str(final byte[] data, final Charset charset) {
+    public static String str(byte[] data, Charset charset) {
         if (data == null) {
             return null;
         }
@@ -408,26 +413,26 @@ public class Convert {
         return new String(data, charset);
     }
 
-    public static String str(final ByteBuffer data, final String charset) {
+    public static String str(ByteBuffer data, String charset) {
         if (data == null) {
             return null;
         }
         return str(data, Charset.forName(charset));
     }
 
-    public static String str(final ByteBuffer data, Charset charset) {
+    public static String str(ByteBuffer data, Charset charset) {
         if (null == charset) {
             charset = Charset.defaultCharset();
         }
         return charset.decode(data).toString();
     }
 
-    public static String toSBC(final String input) {
+    public static String toSBC(String input) {
         return toSBC(input, null);
     }
 
-    public static String toSBC(final String input, final Set<Character> notConvertSet) {
-        final char[] c = input.toCharArray();
+    public static String toSBC(String input, Set<Character> notConvertSet) {
+        char[] c = input.toCharArray();
         for (int i = 0; i < c.length; ++i) {
             if (null == notConvertSet || !notConvertSet.contains(c[i])) {
                 if (c[i] == ' ') {
@@ -440,12 +445,12 @@ public class Convert {
         return new String(c);
     }
 
-    public static String toDBC(final String input) {
+    public static String toDBC(String input) {
         return toDBC(input, null);
     }
 
-    public static String toDBC(final String text, final Set<Character> notConvertSet) {
-        final char[] c = text.toCharArray();
+    public static String toDBC(String text, Set<Character> notConvertSet) {
+        char[] c = text.toCharArray();
         for (int i = 0; i < c.length; ++i) {
             if (null == notConvertSet || !notConvertSet.contains(c[i])) {
                 if (c[i] == '\u3000') {
@@ -455,25 +460,25 @@ public class Convert {
                 }
             }
         }
-        final String returnString = new String(c);
+        String returnString = new String(c);
         return returnString;
     }
 
     public static String digitUppercase(double n) {
-        final String[] fraction = {"角", "分"};
-        final String[] digit = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
-        final String[][] unit = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};
-        final String head = (n < 0.0) ? "负" : "";
+        String[] fraction = {"角", "分"};
+        String[] digit = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+        String[][] unit = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};
+        String head = (n < 0.0) ? "负" : "" ;
         n = Math.abs(n);
-        String s = "";
+        String s = "" ;
         for (int i = 0; i < fraction.length; ++i) {
             s += (digit[(int) (Math.floor(n * 10.0 * Math.pow(10.0, i)) % 10.0)] + fraction[i]).replaceAll("(零.)+", "");
         }
         if (s.length() < 1) {
-            s = "整";
+            s = "整" ;
         }
         for (int integerPart = (int) Math.floor(n), j = 0; j < unit[0].length && integerPart > 0; ++j) {
-            String p = "";
+            String p = "" ;
             for (int k = 0; k < unit[1].length && n > 0.0; ++k) {
                 p = digit[integerPart % 10] + unit[1][k] + p;
                 integerPart /= 10;

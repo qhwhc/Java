@@ -11,8 +11,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 #mq配置
 mq:
-   #activemq配置
-  activemq: 
+  #activemq配置
+  activemq:
     #开启标识
     enabled: true
     #activemq服务地址

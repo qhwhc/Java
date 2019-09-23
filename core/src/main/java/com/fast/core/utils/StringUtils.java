@@ -2,6 +2,7 @@ package com.fast.core.utils;
 
 
 import org.apache.commons.lang3.text.StrBuilder;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
@@ -13,25 +14,26 @@ import java.util.UUID;
  * @Version 1.0
  */
 public class StringUtils {
-    private static final String NULLSTR = "";
+    private static final String NULLSTR = "" ;
     private static final char SEPARATOR = '_';
+
     /**
+     * @return java.lang.String
      * @Author cyb
      * @Description 获取32位UUID
      * @Date 2019/7/31 10:39
      * @Param []
-     * @return java.lang.String
      **/
     public static String get32UUID() {
         return UUID.randomUUID().toString().replace(String.valueOf(SEPARATOR), "");
     }
 
     /**
+     * @return boolean
      * @Author cyb
      * @Description 判空
      * @Date 2019/7/31 16:40
      * @Param [coll]
-     * @return boolean
      **/
     public static boolean isEmpty(Collection<?> coll) {
         return isNull(coll) || coll.isEmpty();
@@ -74,11 +76,11 @@ public class StringUtils {
     }
 
     /**
+     * @return java.lang.String
      * @Author cyb
      * @Description 首字母转换为小写
-     * @Date 2019/7/31 10:52 
+     * @Date 2019/7/31 10:52
      * @Param [str]
-     * @return java.lang.String
      **/
     public static String uncapitalize(String str) {
         if (str == null) {
@@ -90,13 +92,13 @@ public class StringUtils {
         }
         return new StrBuilder(strLen).append(Character.toLowerCase(str.charAt(0))).append(str.substring(1)).toString();
     }
-    
+
     /**
+     * @return java.lang.String
      * @Author cyb
      * @Description 转换为驼峰命名法
-     * @Date 2019/7/31 11:00 
+     * @Date 2019/7/31 11:00
      * @Param [name]
-     * @return java.lang.String
      **/
     public static String convertToCamelCase(String name) {
         StringBuilder result = new StringBuilder();
@@ -116,11 +118,41 @@ public class StringUtils {
     }
 
     /**
+     * @description: 转换为下划线
+     * @author: cyb
+     * @since : 2019/9/20
+     */
+    public static String toUnderScoreCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            boolean nextUpperCase = true;
+            if (i < s.length() - 1) {
+                nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
+            }
+            if (i <= 0 || !Character.isUpperCase(c)) {
+                upperCase = false;
+            } else {
+                if (!(upperCase && nextUpperCase)) {
+                    sb.append(SEPARATOR);
+                }
+                upperCase = true;
+            }
+            sb.append(Character.toLowerCase(c));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @return java.lang.String
      * @Author cyb
      * @Description 字符串截取
-     * @Date 2019/7/31 16:01 
+     * @Date 2019/7/31 16:01
      * @Param [str, start]
-     * @return java.lang.String
      **/
     public static String substring(String str, int start) {
         if (str == null) {
@@ -137,6 +169,7 @@ public class StringUtils {
         }
         return str.substring(start);
     }
+
     public static String substring(String str, int start, int end) {
         if (str == null) {
             return NULLSTR;

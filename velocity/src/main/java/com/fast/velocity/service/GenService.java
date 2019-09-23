@@ -12,14 +12,14 @@ public interface GenService {
 
     List<TableInfoDTO> selectTableList(TableInfoDTO tableInfoDTO);
 
-    void generatorCode2Dir(String tableName,String filePath);
+    void generatorCode2Dir(String tableName, String filePath);
 
     /**
+     * @return void
      * @Author cyb
      * @Description 生成压缩文件
-     * @Date 2019/8/13 16:37 
+     * @Date 2019/8/13 16:37
      * @Param [tableName, filePath]
-     * @return void
      **/
-    public void generatorCode2Zip(String tableName,String filePath);
+    public void generatorCode2Zip(String tableName, String filePath);
 }

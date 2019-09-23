@@ -1,6 +1,7 @@
-package com;
+package com.test.base.springcache;
 
-import com.demo.UnlessDemo;
+import com.fast.BaseApplication;
+import com.fast.springcache.demo.UnlessDemo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Random;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BaseApplication.class)
 public class UnlessTests {
 
 
@@ -19,13 +20,13 @@ public class UnlessTests {
 
     /**
      * methodOne无condition条件
-     *
+     * <p>
      * methodTwo需要验证condition条件
      *
      * @date 2019/4/13 11:55
      */
     @Test
-    public  void testVoidCacheOne() {
+    public void testVoidCacheOne() {
         Integer i = new Random().nextInt(10000);
         Integer res = demo.methodTwo(i);
         System.out.println(res);

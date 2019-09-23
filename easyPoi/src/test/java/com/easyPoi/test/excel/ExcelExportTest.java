@@ -44,7 +44,7 @@ public class ExcelExportTest {
             // 一个Map对应一行数据（如果需要导出多行数据，那么需要多个Map）
             aRowMap = new HashMap<>(16);
             for (int j = 0; j < COMMON_KEY_INDEX; j++) {
-                String key = j + "";
+                String key = j + "" ;
                 aRowMap.put(key, "坐标为(" + i + "," + j + ")");
             }
             rowDataList.add(aRowMap);
@@ -83,9 +83,8 @@ public class ExcelExportTest {
 
     /**
      * 对象---直接导出(无需模板)
-     *
+     * <p>
      * 注:如果模型 的父类的属性也有@Excel注解，那么导出excel时，会连该模型的父类的属性也一会儿导出
-     *
      */
     @Test
     public void directExportExcelByObject() throws IOException {
@@ -100,7 +99,7 @@ public class ExcelExportTest {
                     new Date(),
                     "className" + i);
             student.setSchoolName("学校名称" + i);
-            student.setSchoolAddress("学校地址" +i);
+            student.setSchoolAddress("学校地址" + i);
             list.add(student);
         }
         ExportParams exportParams = new ExportParams();
@@ -119,10 +118,9 @@ public class ExcelExportTest {
 
     /**
      * 模板导出---Map组装数据
-     *
+     * <p>
      * 注:.xls的模板可以导出.xls文件，也可以导出xlsx的文件;
-     *    同样的, .xlsx的模板可以导出.xls文件，也可以导出xlsx的文件;
-     *
+     * 同样的, .xlsx的模板可以导出.xls文件，也可以导出xlsx的文件;
      */
     @Test
     public void templateExportExcelByMap() throws IOException {
@@ -160,12 +158,11 @@ public class ExcelExportTest {
 
     /**
      * 模板导出---对象组装数据
-     *
+     * <p>
      * 注:实际上仍然是"模板导出---Map组装数据",不过这里借助了工具类，将对象先转换为了Map<String, Object>
-     *
+     * <p>
      * 注:.xls的模板可以导出.xls文件，也可以导出xlsx的文件;
-     *    同样的, .xlsx的模板可以导出.xls文件，也可以导出xlsx的文件;
-     *
+     * 同样的, .xlsx的模板可以导出.xls文件，也可以导出xlsx的文件;
      */
     @Test
     public void templateExportExcelByObject() throws IOException, IllegalAccessException {
@@ -204,8 +201,7 @@ public class ExcelExportTest {
     /**
      * 对象转换为Map<String, Object>的工具类
      *
-     * @param obj
-     *            要转换的对象
+     * @param obj 要转换的对象
      * @return map
      * @throws IllegalAccessException
      */

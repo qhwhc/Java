@@ -16,8 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class FtpUtilTest {
     private FtpUtil ftpUtil = new FtpUtil();
+
     @Test
-    public void ftpDownload(){
-        ftpUtil.downloadFile("home/ftpuser/uploadFile/pb_code/notice/","fs_rpt_file68e854be34e03e273bda5a81f4419819.txt","d://");
+    public void ftpDownload() {
+        ftpUtil.downloadFile("home/ftpuser/uploadFile/pb_code/notice/", "fs_rpt_file68e854be34e03e273bda5a81f4419819.txt", "d://");
     }
 }
