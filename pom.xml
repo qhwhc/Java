@@ -25,6 +25,7 @@
         <module>web</module>
         <module>easyPoi</module>
         <module>jsqlParser</module>
+        <module>usersys</module>
     </modules>
 
     <properties>

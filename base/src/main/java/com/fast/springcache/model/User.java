@@ -3,7 +3,9 @@ package com.fast.springcache.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
 
@@ -36,4 +39,13 @@ public class User implements Serializable {
      * 座右铭
      */
     private String motto;
+
+    @PostConstruct
+    public void init(){
+        this.name = "张三";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new User().getName());
+    }
 }

@@ -1,63 +1,59 @@
-#数据源配置
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    druid:
-      master: #主库
-        url: jdbc:mysql://192.168.1.103:3306/information_schema?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&allowMultiQueries=true&serverTimezone=UTC
-        username: root
-        password: root
-      #slave:  #从库
-      #    open: true
-      #    url: jdbc:mysql://localhost:3306/dps-fast?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
-      #    username: dps-fast
-      #    password: password
-      # 初始连接数
-      initial-size: 10
-      # 最大连接池数量
-      max-active: 100
-      # 最小连接池数量
-      min-idle: 10
-      # 配置获取连接等待超时的时间
-      max-wait: 60000
-      # 打开PSCache，并且指定每个连接上PSCache的大小
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      timeBetweenEvictionRunsMillis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1 FROM DUAL
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /monitor/druid/*
-      filter:
-        stat:
-          log-slow-sql: true
-          slow-sql-millis: 1000
-          merge-sql: false
-        wall:
-          config:
-            multi-statement-allow: true
+    url: jdbc:mysql://192.168.1.103:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      connection-test-query: SELECT 1 FROM DUAL
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootDemoHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
+#  quartz:
+#    # 参见 org.springframework.boot.autoconfigure.quartz.QuartzProperties
+#    job-store-type: jdbc
+#    wait-for-jobs-to-complete-on-shutdown: true
+#    scheduler-name: SpringBootDemoScheduler
+#    properties:
+#      org.quartz.threadPool.threadCount: 5
+#      org.quartz.threadPool.threadPriority: 5
+#      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true
+#      org.quartz.jobStore.misfireThreshold: 5000
+#      org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#      # 在调度流程的第一步，也就是拉取待即将触发的triggers时，是上锁的状态，即不会同时存在多个线程拉取到相同的trigger的情况，也就避免的重复调度的危险。参考：https://segmentfault.com/a/1190000015492260
+#      org.quartz.jobStore.acquireTriggersWithinLock: true
+logging:
+  level:
+    com.fast: debug
+    com.fast.task.quartz.mapper: trace
+mybatis-plus:
+  configuration:
+    # 下划线转驼峰
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.fast.task.quartz.entity
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  not-empty: true
+  style: camelhump
+  wrap-keyword: "`{0}`"
+  safe-delete: true
+  safe-update: true
+  identity: MYSQL
 
-mybatis:
-  config-location: classpath:config/mybatis-config.xml
-  mapper-locations: classpath:mapper/*Mapper.xml
-
-server:
-  port: 8002
-
-# 代码生成
-gen:
-  # 作者
-  author: cyb
-  # 默认生成包路径 module 需改成自己的模块名称
-  package-name: com.fast.base.module
-  # 自动去除表前缀，默认是true
-  auto-remove-pre: true
-  # 表前缀(类名不会包含表前缀)
-  table-prefix: T_
+pagehelper:
+  auto-dialect: true
+  helper-dialect: mysql
+  reasonable: true
+  params: count=countSql

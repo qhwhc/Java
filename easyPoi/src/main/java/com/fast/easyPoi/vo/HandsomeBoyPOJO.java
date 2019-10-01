@@ -1,5 +1,6 @@
 package com.fast.easyPoi.vo;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 /**
@@ -16,6 +17,7 @@ public class HandsomeBoyPOJO {
     /**
      * 性别
      */
+    @Excel(name = "性别",replace = {"男_1","女_2"})
     private String gender;
 
     /**

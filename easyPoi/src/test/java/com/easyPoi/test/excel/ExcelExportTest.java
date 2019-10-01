@@ -179,7 +179,7 @@ public class ExcelExportTest {
         for (int i = 0; i < 5; i++) {
             handsomeBoyPOJO = new HandsomeBoyPOJO();
             handsomeBoyPOJO.setAge(20 + i);
-            handsomeBoyPOJO.setGender(i % 2 == 0 ? "女" : "男");
+            handsomeBoyPOJO.setGender(i % 2 == 0 ? "1" : "2");
             handsomeBoyPOJO.setHandsomeValue(95 + i + "(满分100分)");
             handsomeBoyPOJO.setHobby("女。。。。");
             handsomeBoyPOJO.setMotto("我是一只小小小小鸟~");
@@ -187,7 +187,7 @@ public class ExcelExportTest {
             list.add(handsomeBoyPOJO);
         }
         // 生成workbook 并导出
-        Workbook workbook = ExcelExportUtil.exportExcel(params, objectToMap(resultPOJO));
+        Workbook workbook = ExcelExportUtil.exportExcel(params,objectToMap(resultPOJO));
         File savefile = new File("C:/Users/ASUS/Desktop/");
         if (!savefile.exists()) {
             boolean result = savefile.mkdirs();
